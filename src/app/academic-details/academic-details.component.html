@@ -1,0 +1,40 @@
+<div class="col-md-6 text-center m-2">
+    <h2>Academic Profile</h2>
+</div>
+
+<div class="d-flex justify-content-center align-items-center">
+  <div class="col-md-6">
+    <span>
+      <button routerLink="/" class="btn btn-outline-danger m-5">View Students</button>
+    </span>
+  </div>
+  <div>
+    <button type="button" class="btn btn-outline-success">+Add Student Grade</button>
+  </div>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mt-2">
+
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="subject">
+    <th mat-header-cell *matHeaderCellDef> Subject </th>
+    <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="grade">
+    <th mat-header-cell *matHeaderCellDef> Grade </th>
+    <td mat-cell *matCellDef="let element"> {{element.grade}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="credits">
+    <th mat-header-cell *matHeaderCellDef> Credits </th>
+    <td mat-cell *matCellDef="let element"> {{element.credits}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
