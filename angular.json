@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "student-data-retrieval": {
+    "student-data-management": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/student-data-retrieval",
+            "outputPath": "dist/student-data-management",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "student-data-retrieval:build:production"
+              "browserTarget": "student-data-management:build:production"
             },
             "development": {
-              "browserTarget": "student-data-retrieval:build:development"
+              "browserTarget": "student-data-management:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "student-data-retrieval:build"
+            "browserTarget": "student-data-management:build"
           }
         },
         "test": {
@@ -108,5 +108,5 @@
       }
     }
   },
-  "defaultProject": "student-data-retrieval"
+  "defaultProject": "student-data-management"
 }

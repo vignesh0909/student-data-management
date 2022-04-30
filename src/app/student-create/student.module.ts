@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 import {Component} from '@angular/core';
 
 import { AuthRoutingModule } from "../auth/auth-routing.module";
-import { AngularMaterialModule } from "../angular-material.module";
+import { AngularMaterialModule } from "../material/angular-material.module";
 import { StudentRoutingModule, RoutingComponents } from "./student-routing.module";
 
 @NgModule({

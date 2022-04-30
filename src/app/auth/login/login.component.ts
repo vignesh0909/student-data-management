@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { NgForm, FormGroup, FormControl, Validators} from "@angular/forms";
 import { Subscription } from "rxjs";
 import { Router } from '@angular/router';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
+
 
 //import { AuthService } from "../../services/auth.service";
 import { LoginService } from '../../services/login.service';
@@ -11,6 +13,7 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  faLock = faLock;
   isLoading = false;
   responsedata: any;
   private authStatusSub!: Subscription;
@@ -21,14 +24,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-  loginform = new FormGroup({
+  loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
 
   Proceedlogin() {
-    if (this.loginform.valid) {
-      this.service.Proceddlogin(this.loginform.value).subscribe(result => {
+    if (this.loginForm.valid) {
+      this.service.Proceddlogin(this.loginForm.value).subscribe(result => {
         this.responsedata = result;
         if (this.responsedata != null) {
           localStorage.setItem('token', this.responsedata.jwtToken);

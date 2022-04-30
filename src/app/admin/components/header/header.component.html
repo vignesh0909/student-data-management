@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <span>
+    <a routerLink="/admin/dashboard">View Students</a>
+  </span>
+  <span class="spacer"></span>
+  <ul>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="upload-personal-details" routerLinkActive="mat-accent">Upload Personal Data</a>
+    </li>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="upload-grades" routerLinkActive="mat-accent">Upload Grades</a>
+    </li>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="upload-placement-details" routerLinkActive="mat-accent">Upload Placements Data</a>
+    </li>
+    <li *ngIf="!userIsAuthenticated">
+      <button mat-button (click)="logout()">Logout</button>
+    </li>
+  </ul>
+</mat-toolbar>

@@ -6,7 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from "./header/header.component";
-import { AngularMaterialModule } from "./angular-material.module";
+import { AngularMaterialModule } from "./material/angular-material.module";
 import { StudentCreateComponent } from './student-create/student-create.component';
 import { OrderModule } from 'ngx-order-pipe';
 import { FilterPipeModule } from 'ngx-filter-pipe';
@@ -14,6 +14,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PlacementDetailsComponent } from './placement-details/placement-details/placement-details.component';
 import { AcademicDetailsComponent } from "./academic-details/academic-details.component";
 import { ExcelUploadComponent } from './excel-upload/excel-upload.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { ExcelUploadComponent } from './excel-upload/excel-upload.component';
     AngularMaterialModule,
     OrderModule,
     NgxPaginationModule,
+    FontAwesomeModule,
   ],
   providers: [
     ExcelUploadComponent

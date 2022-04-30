@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table'
 
 import { AuthRoutingModule } from "../auth/auth-routing.module";
-import { AngularMaterialModule } from "../angular-material.module";
+import { AngularMaterialModule } from "../material/angular-material.module";
 
 @NgModule({
   declarations: [

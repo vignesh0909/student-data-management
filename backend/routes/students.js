@@ -21,6 +21,7 @@ router.post('/', (req, res) => {
     if(err){
       console.log('Error in post data'+err);
     } else{
+      //console.log(doc[0]);
       res.send(doc);
     }
   })
@@ -50,6 +51,21 @@ router.get('/:id', (req, res) => {
   } else {
     return res.status(400).send(`No record found with Id ${req.params.id}`);
   }
+})
+
+
+router.get('/findByRoll/:rollno', (req, res) => {
+  var query = {rollno: req.params.rollno};
+  Student.find(query, (err, doc) => {
+    if(err){
+      console.log(doc);
+      console.log('Error in GET student by rollno ' + err);
+    } else {
+      console.log(doc);
+      res.send(doc);
+    }
+  })
+  //return res.status(400).send(`No record found with roll ${req.params.rollno}`);
 })
 
 //PUT(Update) student API

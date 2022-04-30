@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { NgForm } from "@angular/forms";
+import { NgForm, FormGroup, FormControl, Validators} from "@angular/forms";
 import { Subscription } from "rxjs";
 
 import { AuthService } from "../../services/auth.service";
@@ -11,26 +11,26 @@ import { AuthService } from "../../services/auth.service";
 export class SignupComponent implements OnInit, OnDestroy {
   isLoading = false;
   private authStatusSub!: Subscription;
+  subscription: any;
 
   constructor(public authService: AuthService) {}
 
+  loginForm = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  });
+
   ngOnInit() {
-    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
-      authStatus => {
-        this.isLoading = false;
-      }
-    );
+
   }
 
   onSignup(form: NgForm) {
-    if (form.invalid) {
-      return;
-    }
-    this.isLoading = true;
-    this.authService.createUser(form.value.email, form.value.password);
+
   }
 
   ngOnDestroy() {
-    this.authStatusSub.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
