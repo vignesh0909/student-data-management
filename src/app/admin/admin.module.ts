@@ -10,6 +10,7 @@ import { UploadPersonalDetailsComponent } from './components/upload-personal-det
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AngularMaterialModule } from 'app/material/angular-material.module';
+import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AngularMaterialModule } from 'app/material/angular-material.module';
     UploadGradesComponent,
     UploadPlacementDetailsComponent,
     UploadPersonalDetailsComponent,
+    WelcomePageComponent,
   ],
   imports: [CommonModule,
     AdminRoutingModule,

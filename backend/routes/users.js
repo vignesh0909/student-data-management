@@ -1,37 +1,46 @@
 const express = require("express");
 const router = express.Router();
 const ObjectId = require('mongoose').Types.ObjectId;
-const Student = require("../models/student.js");
-const Grades = require("../models/grades.js");
-
+const Users = require("../models/users.js");
+const bcrypt = require("bcrypt");
 
 //POST student API
 router.post('/', (req, res) => {
-  let stu = new Student({
-    rollno: req.body.rollno,
-    name: req.body.name,
-    dept: req.body.dept,
-    year: req.body.year,
-    sem: req.body.sem,
-    sec: req.body.sec,
-    phno: req.body.phno,
-    //grades: req.body.grades,
-    //placements: req.body.placements
-  });
+  bcrypt.hash(req.body.password, 10)
+    .then(hash => {
+      const user = new Users({
+        username: req.body.username,
+        password: hash,
+        role: req.body.role,
+      });
+      /*
+      user.save((err,doc) => {
+        if(err){
+          console.log('Error in post data'+err);
+        } else{
+          console.log(doc);
+          res.send(doc);
+        }
+      });
+      */
+      user.save()
+        .then(result => {
+          res.status(201).json({
+            message: 'User created!',
+            result: result
+          });
+        })
+        .catch(err => {
+          res.status(500).json({
+            error: err
+          })
+        });
+    });
+});
 
-  stu.save((err,doc) => {
-    if(err){
-      console.log('Error in post data'+err);
-    } else{
-      //console.log(doc[0]);
-      res.send(doc);
-    }
-  })
-})
-
-//GET all students API
+//GET all users API
 router.get('/', (req, res) => {
-  Student.find((err, doc) => {
+  Users.find((err, doc) => {
       if(err){
           console.log('Error in GET Data ' + err);
       } else {
@@ -40,28 +49,12 @@ router.get('/', (req, res) => {
   })
 })
 
-//GET single student using Id
-router.get('/:id', (req, res) => {
-  if(ObjectId.isValid(req.params.id)){
-    Student.findById(req.params.id, (err, doc) => {
-      if(err){
-        console.log('Error in GET student by Id ' + err);
-      } else {
-        res.send(doc);
-      }
-    })
-  } else {
-    return res.status(400).send(`No record found with Id ${req.params.id}`);
-  }
-})
-
-
-router.get('/findByRoll/:rollno', (req, res) => {
-  var query = {rollno: req.params.rollno};
-  Student.find(query, (err, doc) => {
+router.get('/findByUsername/:username', (req, res) => {
+  var query = {rollno: req.params.username};
+  Users.find(query, (err, doc) => {
     if(err){
       console.log(doc);
-      console.log('Error in GET student by rollno ' + err);
+      console.log('Error in GET student by username ' + err);
     } else {
       console.log(doc);
       res.send(doc);
@@ -70,20 +63,16 @@ router.get('/findByRoll/:rollno', (req, res) => {
   //return res.status(400).send(`No record found with roll ${req.params.rollno}`);
 })
 
-//PUT(Update) student API
-router.put('/:id', (req, res) => {
+//PUT(Update) users API
+router.patch('/:id', (req, res) => {
   if(ObjectId.isValid(req.params.id)){
-    let stu = {
-      rollno: req.body.rollno,
-      name: req.body.name,
-      dept: req.body.dept,
-      year: req.body.year,
-      sec: req.body.sec,
-      phno: req.body.phno
+    let user = {
+      username: req.body.username,
+      password: req.body.password,
     }
-    Student.findByIdAndUpdate(req.params.id, {$set :stu}, {new: true},(err, doc) => {
+    Users.findByIdAndUpdate(req.params.id, {$set :user}, {new: true},(err, doc) => {
       if(err){
-        console.log('Error in UPDATE student by Id ' + err);
+        console.log('Error in UPDATE User Credentials' + err);
       } else {
         res.send(doc);
       }

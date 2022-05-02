@@ -10,7 +10,7 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://vignesh:vignesh@cluster1.wdjeo.mongodb.net/meanDB?retryWrites=true&w=majority"
+    "mongodb+srv://vignesh:vignesh@cluster1.wdjeo.mongodb.net/meanDB"
   )
   .then(() => {
     console.log("Connected to database!");
@@ -18,9 +18,6 @@ mongoose
   .catch(() => {
     console.log("Connection failed!");
   });
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

@@ -48,6 +48,8 @@
     "ngx-filter-pipe": "^2.1.2",
     "ngx-order-pipe": "^2.2.0",
     "ngx-pagination": "^5.1.1",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
     "rxjs": "~7.5.0",
     "socket.io": "^4.4.1",
     "source-map-resolve": "^0.6.0",

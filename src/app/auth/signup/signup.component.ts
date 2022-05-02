@@ -15,7 +15,7 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   constructor(public authService: AuthService) {}
 
-  loginForm = new FormGroup({
+  signupForm = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
@@ -29,8 +29,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+
   }
 }

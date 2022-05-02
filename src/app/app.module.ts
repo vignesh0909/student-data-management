@@ -13,8 +13,11 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PlacementDetailsComponent } from './placement-details/placement-details/placement-details.component';
 import { AcademicDetailsComponent } from "./academic-details/academic-details.component";
-import { ExcelUploadComponent } from './excel-upload/excel-upload.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DashboardComponent } from './student/components/dashboard/dashboard.component';
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { LoginComponent } from "./auth/login/login.component";
+import { SignupComponent } from "./auth/signup/signup.component";
 
 
 @NgModule({
@@ -24,7 +27,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     StudentCreateComponent,
     PlacementDetailsComponent,
     AcademicDetailsComponent,
-    ExcelUploadComponent
+    DashboardComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +41,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     OrderModule,
     NgxPaginationModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
-    ExcelUploadComponent
+
   ],
   bootstrap: [AppComponent]
 })

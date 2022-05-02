@@ -13,8 +13,7 @@
 </head>
 <body>
 <div class="login-form">
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <form [formGroup]="loginForm" (ngSubmit)="onSignup">
+    <form [formGroup]="signupForm" (ngSubmit)="onSignup">
 		<div class="avatar"><i class="material-icons">&#xE7FF;</i></div>
     	<h4 class="modal-title">Register Your Account</h4>
         <div class="form-group">

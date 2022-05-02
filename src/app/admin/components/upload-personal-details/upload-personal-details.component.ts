@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExcelUploadService } from 'app/services/excel-upload.service';
+import { UploadPersonalDetailsService } from 'app/services/upload-personal-details.service';
 import * as XLSX from 'xlsx';
 
 
@@ -13,8 +13,9 @@ export class UploadPersonalDetailsComponent implements OnInit {
   convertedJson!: string;
   data: any;
   subscription: any;
+  uploadSuccess: any;
 
-  constructor(private personalUpload: ExcelUploadService) { }
+  constructor(private personalUpload: UploadPersonalDetailsService) { }
 
   ngOnInit(): void {
 
@@ -34,6 +35,7 @@ export class UploadPersonalDetailsComponent implements OnInit {
         console.log(data);
         this.convertedJson = JSON.stringify(data,undefined,4);
         this.personalUpload.jsonToMongo(data);
+        this.uploadSuccess = true;
       })
       //console.log(workbook);
     }

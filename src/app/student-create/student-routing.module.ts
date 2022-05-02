@@ -13,8 +13,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     AngularMaterialModule
   ],
-  exports: [RouterModule],
-  providers: []
+  exports: [RouterModule]
 })
 
 export class StudentRoutingModule {}

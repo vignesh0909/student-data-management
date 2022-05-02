@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExcelUploadService } from 'app/services/excel-upload.service';
+import { UploadPersonalDetailsService } from 'app/services/upload-personal-details.service';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -13,7 +13,7 @@ export class UploadPlacementDetailsComponent implements OnInit {
   data: any;
   subscription: any;
 
-  constructor(private personalUpload: ExcelUploadService) { }
+  constructor(private personalUpload: UploadPersonalDetailsService) { }
 
   ngOnInit(): void {
 

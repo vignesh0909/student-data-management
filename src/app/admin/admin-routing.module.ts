@@ -18,6 +18,7 @@ const routes: Routes = [
       { path: 'upload-grades', component: UploadGradesComponent },
       { path: 'upload-placement-details', component: UploadPlacementDetailsComponent },
       { path: 'upload-personal-details', component: UploadPersonalDetailsComponent },
+      //{ path: 'home', component: HomeComponent },
       {path: '', redirectTo: '/admin', pathMatch: 'full'}
     ],
   },

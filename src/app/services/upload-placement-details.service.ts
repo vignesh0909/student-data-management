@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Student } from '../model/student';
-import { ExcelUploadComponent } from '../excel-upload/excel-upload.component';
-//import { ExcelUploadComponent } from './excel-upload/excel-upload.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ExcelUploadService {
-  url = 'http://localhost:3000/students/';
+export class UploadPersonalDetailsService {
+  url = 'http://localhost:3000/students/placement-details';
   //data: ExcelUploadComponent;
 
   constructor(private http :HttpClient) { }

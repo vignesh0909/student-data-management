@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const Student = mongoose.model('Student', {
   rollno: { type: String, unique: true },
@@ -27,4 +28,5 @@ const Student = mongoose.model('Student', {
   */
 });
 
+//Student.plugin(uniqueValidator);
 module.exports = Student;

@@ -13,6 +13,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  reload(){
+    window.location.reload();
+  }
+
   logout(): void {
     this.auth.logout();
   }
