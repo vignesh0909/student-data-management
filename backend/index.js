@@ -2,8 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const mongoose = require("./app.js");
-const routes1 = require('./routes/students');
-const routes2 = require('./routes/users');
+const studentRoutes = require('./routes/students');
+const userRoutes = require('./routes/users');
+const gradeRoutes = require('./routes/grades');
+
 //const debug = require("debug")("node-angular");
 //const http = require("http");
 //const path = require("path");
@@ -14,5 +16,6 @@ app.use(express.json());
 app.use(cors());
 app.listen(3000, () => console.log("Server Started at port: 3000"));
 
-app.use('/students', routes1);
-app.use('/users', routes2);
+app.use('/students', studentRoutes);
+app.use('/users', userRoutes);
+app.use('/students/grades', gradeRoutes);

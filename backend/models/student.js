@@ -9,23 +9,6 @@ const Student = mongoose.model('Student', {
   sem: { type: Number, required: true },
   sec: { type: String, required: true },
   phno: { type: String, required: true },
-  //creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }
-  /*
-  grades: [{
-    subject: String,
-    sem: Number,
-    grade: String,
-    credits: Number,
-    sgpa: Number,
-    cgpa: Number,
-  }],
-  placements: {
-    status: String,
-    batch: Number,
-    enrolled: Array,
-    placed: Array,
-  },
-  */
 });
 
 //Student.plugin(uniqueValidator);

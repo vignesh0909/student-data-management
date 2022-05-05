@@ -85,3 +85,10 @@ body {
 .mat-spinner{
   margin: auto;
 }
+img{
+  border:4px solid green;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}

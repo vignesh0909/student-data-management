@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { NgForm, FormGroup, FormControl, Validators, FormsModule} from "@angular/forms";
 import { Subscription } from "rxjs";
 import { Router } from '@angular/router';
-import { faLock } from '@fortawesome/free-solid-svg-icons';
 
 //import { AuthService } from "../../services/auth.service";
 import { AuthService } from "app/services/auth.service";
@@ -12,16 +11,16 @@ import { AuthService } from "app/services/auth.service";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  faLock = faLock;
   isLoading = false;
   responsedata: any;
   private authStatusSub!: Subscription;
   subscription: any;
+  role: string[];
 
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
-    if(this.auth.isLoggedIn()){
+    if(this.auth.getIsAuth()){
       this.router.navigate(['/admin']);
     }
   }
@@ -32,9 +31,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   });
 
   Proceedlogin() {
-    console.log(this.loginForm.value);
+    //console.log(this.loginForm.value);
     if (this.loginForm.valid) {
-      this.auth.adminLogin(this.loginForm.value);
+      this.isLoading = true;
+      this.auth.loginUser(this.loginForm.value);
+    }
+    else{
+      return;
     }
   }
 

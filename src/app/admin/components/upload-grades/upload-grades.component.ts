@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UploadPersonalDetailsService } from 'app/services/upload-personal-details.service';
+import { UploadGradesService } from 'app/services/upload-grades.service';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -13,7 +13,7 @@ export class UploadGradesComponent implements OnInit {
   data: any;
   subscription: any;
 
-  constructor(private gradesUpload: UploadPersonalDetailsService) { }
+  constructor(private gradesUpload: UploadGradesService) { }
 
   ngOnInit(): void {
 
@@ -30,11 +30,8 @@ export class UploadGradesComponent implements OnInit {
       let workbook = XLSX.read(binaryData,{type: 'binary'});
       workbook.SheetNames.forEach(sheet => {
         var data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
-        console.log(data);
-        this.convertedJson = JSON.stringify(data,undefined,4);
         this.gradesUpload.jsonToMongo(data);
       })
-      //console.log(workbook);
     }
   }
 

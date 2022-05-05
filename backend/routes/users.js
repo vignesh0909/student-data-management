@@ -3,8 +3,10 @@ const router = express.Router();
 const ObjectId = require('mongoose').Types.ObjectId;
 const Users = require("../models/users.js");
 const bcrypt = require("bcrypt");
+const { result } = require("lodash");
+const jwt = require("jsonwebtoken");
 
-//POST student API
+//POST student on signup API(Registration)
 router.post('/', (req, res) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
@@ -13,16 +15,6 @@ router.post('/', (req, res) => {
         password: hash,
         role: req.body.role,
       });
-      /*
-      user.save((err,doc) => {
-        if(err){
-          console.log('Error in post data'+err);
-        } else{
-          console.log(doc);
-          res.send(doc);
-        }
-      });
-      */
       user.save()
         .then(result => {
           res.status(201).json({
@@ -31,9 +23,10 @@ router.post('/', (req, res) => {
           });
         })
         .catch(err => {
+          //console.log(err);
           res.status(500).json({
             error: err
-          })
+          });
         });
     });
 });
@@ -82,36 +75,45 @@ router.patch('/:id', (req, res) => {
   }
 })
 
-//Delete single student using Id
-router.delete('/:id', (req, res) => {
-  if(ObjectId.isValid(req.params.id)){
-    Student.findByIdAndRemove(req.params.id, (err, doc) => {
-      if(err){
-        console.log('Error in DELETE student by Id ' + err);
-      } else {
-        res.send(doc);
+router.post('/login', (req, res, next) => {
+  let fetchedUser;
+  Users.findOne({ username: req.body.username })
+    .then(user => {
+      //console.log(user);
+      const currentUser = user;
+      if (!user) {
+        return res.status(401).json({
+          message: "Auth Failed"
+        });
       }
+      fetchedUser = user;
+      return bcrypt.compare(req.body.password, user.password);
     })
-  } else {
-    return res.status(400).send(`No record found with Id ${req.params.id}`);
-  }
-})
-
-
-
-//get grades
-router.get('/:id/grades', (req, res) => {
-  if(ObjectId.isValid(req.params.id)){
-    Student.findById(req.params.id, (err, doc) => {
-      if(err){
-        console.log('Error in GET student by Id ' + err);
-      } else {
-        //console.log(doc.grades);
-        res.send(doc.grades);
+    .then(result => {
+      if(!result){
+        return res.status(401).json({
+          message: 'Auth Failed'
+        });
       }
+      //Users.findById()
+      //console.log(fetchedUser)
+      const token = jwt.sign(
+        {username: fetchedUser.username, userId: fetchedUser._id},
+        'secret_this_should_be_longer',
+        { expiresIn: '1h' }
+        );
+      res.status(200).json({
+        token: token,
+        expiresIn: 3600,
+        role: fetchedUser.role
+      });
     })
-  } else {
-    return res.status(400).send(`No record found with Id ${req.params.id}`);
-  }
-})
+    .catch(err => {
+      console.log(err);
+      return res.status(401).json({
+        message: 'Auth Failed'
+      });
+    });
+});
+
 module.exports = router;

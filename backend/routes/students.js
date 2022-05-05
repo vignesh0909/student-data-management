@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ObjectId = require('mongoose').Types.ObjectId;
 const Student = require("../models/student.js");
+const checkAuth = require("../middleware/check-auth");
 
 //POST student API
 router.post('/', (req, res) => {
@@ -36,21 +37,6 @@ router.get('/', (req, res) => {
           res.send(doc);
       }
   })
-})
-
-//GET single student using Id
-router.get('/:id', (req, res) => {
-  if(ObjectId.isValid(req.params.id)){
-    Student.findById(req.params.id, (err, doc) => {
-      if(err){
-        console.log('Error in GET student by Id ' + err);
-      } else {
-        res.send(doc);
-      }
-    })
-  } else {
-    return res.status(400).send(`No record found with Id ${req.params.id}`);
-  }
 })
 
 
@@ -106,21 +92,4 @@ router.delete('/:id', (req, res) => {
   }
 })
 
-
-
-//get grades
-router.get('/:id/grades', (req, res) => {
-  if(ObjectId.isValid(req.params.id)){
-    Student.findById(req.params.id, (err, doc) => {
-      if(err){
-        console.log('Error in GET student by Id ' + err);
-      } else {
-        //console.log(doc.grades);
-        res.send(doc.grades);
-      }
-    })
-  } else {
-    return res.status(400).send(`No record found with Id ${req.params.id}`);
-  }
-})
 module.exports = router;

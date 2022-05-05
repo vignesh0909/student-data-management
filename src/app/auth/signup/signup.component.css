@@ -81,3 +81,7 @@ body {
 .login-form a {
 	color: #4aba70;
 }
+
+.mat-spinner{
+  margin: auto;
+}
