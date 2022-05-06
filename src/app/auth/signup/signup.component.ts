@@ -21,10 +21,16 @@ export class SignupComponent implements OnInit, OnDestroy {
       'faculty'
     ]
   }
-
+  userRole = localStorage.getItem("role");
   ngOnInit() {
-    if(this.auth.getIsAuth()){
+    if(this.auth.getIsAuth() && this.userRole == "admin"){
       this.router.navigate(['/admin']);
+    }
+    else if(this.auth.getIsAuth() && this.userRole == "student"){
+      this.router.navigate(['/student']);
+    }
+    else if(this.auth.getIsAuth() && this.userRole == "faculty"){
+      this.router.navigate(['/faculty']);
     }
   }
 

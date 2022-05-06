@@ -14,11 +14,16 @@ export class AuthService {
   private tokenTimer: NodeJS.Timer;
   private authStatusListener= new Subject<boolean>();
   private isAuthenticated = false;
+  user: string;
 
   constructor(private router: Router, private http :HttpClient) {}
 
   getToken() {
     return this.token;
+  }
+
+  getUser() {
+    return this.user;
   }
 
   getIsAuth(){
@@ -27,10 +32,6 @@ export class AuthService {
 
   getAuthStatusListener(){
     return this.authStatusListener.asObservable();
-  }
-
-  isLoggedIn() {
-    return this.getToken() !== null;
   }
 
   //adminLogin
@@ -64,12 +65,15 @@ export class AuthService {
   }
 
   loginUser(req: any){
-    this.http.post<{token: string, role: string, expiresIn: number }>(this.url+"/login", req)
+    this.http.post<{token: string, user: string, role: string, expiresIn: number }>(this.url+"/login", req)
       .subscribe(response => {
         const token  = response.token;
         this.token = token;
         const role  = response.role;
         this.role = role;
+        const user  = response.user;
+        this.user = user;
+        console.log(response.user);
         if(token){
           const expiresInDuration = response.expiresIn;
           this.setAuthTimer(expiresInDuration);
@@ -126,22 +130,28 @@ export class AuthService {
 
   private saveAuthData(token: string, expirationDate: Date){
     localStorage.setItem("token", token);
+    localStorage.setItem("user", this.user);
+    localStorage.setItem("role", this.role);
     localStorage.setItem("expiration", expirationDate.toISOString());
   }
 
   private clearAuthData(){
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("role");
     localStorage.removeItem("expiration");
   }
 
   private getAuthData(){
     const token = localStorage.getItem("token");
     const expirationDate = localStorage.getItem("expiration");
+    const user = localStorage.getItem("user");
     if(!token || !expirationDate){
       return;
     }
     return{
       token: token,
+      user: user,
       expirationDate: new Date(expirationDate)
     }
   }

@@ -5,29 +5,31 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from "./guards/auth.guard";
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './auth/page-not-found/page-not-found.component';
 import { PlacementDetailsComponent } from './placement-details/placement-details/placement-details.component';
+import { AdminGuard } from './guards/admin.guard';
+import { StudentGuard } from './guards/student.guard';
+import { FacultyGuard } from './guards/faculty.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
-  //{path: '', redirectTo: 'auth/home', pathMatch: 'full'},
   { path: "auth/login", component: LoginComponent},
   { path: "auth/signup", component: SignupComponent},
   {
     path: 'admin',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: 'student',
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard, StudentGuard],
     loadChildren: () =>
       import('./student/student.module').then((m) => m.StudentModule),
   },
   {
     path: 'faculty',
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard, FacultyGuard],
     loadChildren: () =>
       import('./faculty/faculty.module').then((m) => m.FacultyModule),
   },

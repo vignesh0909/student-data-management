@@ -19,9 +19,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(private auth: AuthService, private router: Router) {}
 
+  userRole = localStorage.getItem("role");
+
   ngOnInit() {
-    if(this.auth.getIsAuth()){
+    if(this.auth.getIsAuth() && this.userRole == "admin"){
       this.router.navigate(['/admin']);
+    }
+    else if(this.auth.getIsAuth() && this.userRole == "student"){
+      this.router.navigate(['/student']);
+    }
+    else if(this.auth.getIsAuth() && this.userRole == "faculty"){
+      this.router.navigate(['/faculty']);
     }
   }
 

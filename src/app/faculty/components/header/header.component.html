@@ -7,6 +7,9 @@
     <li >
       <a mat-button routerLink="/faculty">Home</a>
     </li>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="my-profile" routerLinkActive="mat-accent">My Profile</a>
+    </li>
     <li>
       <button mat-button (click)="onLogout()">Logout</button>
     </li>

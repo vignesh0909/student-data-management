@@ -4,6 +4,7 @@ import {
   CanActivate,
   Router,
   RouterStateSnapshot,
+  UrlTree,
 } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
 import { Observable } from 'rxjs';
@@ -11,25 +12,28 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class FacultyGuard implements CanActivate {
   constructor(private router: Router, private authService: AuthService) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> {
-    const isAuth = this.authService.getIsAuth();
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
     const userRole = localStorage.getItem('role');
-    if (!isAuth) {
-      this.router.navigate(['/auth/login']);
+    if (userRole != 'faculty') {
+      alert("un authorized");
+      if(userRole == "admin"){
+        this.router.navigate(['/admin']);
+      }else if(userRole == "student"){
+        this.router.navigate(['/student']);
+      }
+      return false;
+    }else{
+      //this.router.navigate(['/student']);
+      return true;
     }
-    return isAuth;
-    /*
-    else if(isAuth && userRole == "student"){
-      this.router.navigate(['/student']);
-    }
-    else if(isAuth && userRole != "admin"){
-      this.router.navigate(['/admin']);
-    }
-    */
   }
 }

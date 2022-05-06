@@ -1,10 +1,13 @@
 const express = require("express");
+const checkAuth = require("../middleware/check-auth.js");
 const router = express.Router();
 const ObjectId = require('mongoose').Types.ObjectId;
 const Grades = require("../models/grades.js");
 
 //POST student API
-router.post('/', (req, res) => {
+router.post('/',
+  checkAuth,
+  (req, res) => {
   let grades = new Grades({
     rollno: req.body.rollno,
     year: req.body.year,

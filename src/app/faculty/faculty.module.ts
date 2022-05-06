@@ -7,6 +7,7 @@ import { FacultyRoutingModule } from './faculty-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AngularMaterialModule } from 'app/material/angular-material.module';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { WelcomePageComponent } from './components/welcome-page/welcome-page.com
     HeaderComponent,
     HomeComponent,
     WelcomePageComponent,
+    MyProfileComponent,
   ],
   imports: [
     CommonModule,
