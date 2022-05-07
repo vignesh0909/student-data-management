@@ -12,6 +12,7 @@ import { RouterModule } from "@angular/router";
 @NgModule({
   declarations: [
     ForgotPasswordComponent,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,

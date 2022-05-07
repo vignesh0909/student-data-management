@@ -12,11 +12,13 @@ export class AuthService {
   private token: string;
   private role: string;
   private tokenTimer: NodeJS.Timer;
-  private authStatusListener= new Subject<boolean>();
+  private authStatusListener = new Subject<boolean>();
   private isAuthenticated = false;
   user: string;
+  wrongPass: string;
+  errMsg: string;
 
-  constructor(private router: Router, private http :HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) {}
 
   getToken() {
     return this.token;
@@ -26,11 +28,11 @@ export class AuthService {
     return this.user;
   }
 
-  getIsAuth(){
+  getIsAuth() {
     return this.isAuthenticated;
   }
 
-  getAuthStatusListener(){
+  getAuthStatusListener() {
     return this.authStatusListener.asObservable();
   }
 
@@ -52,59 +54,81 @@ export class AuthService {
   */
 
   //userSignup
-  createUser(req: any){
-    this.http.post(this.url, req)
-    .subscribe(response => {
-      alert("User Registration Sucessful!");
-      console.log(response);
-      this.router.navigate(['/auth/login']);
-    },
-    (err) => {
-      alert("User Registration already registered");
-    });
+  createUser(req: any) {
+    this.http.post(this.url, req).subscribe(
+      (response) => {
+        alert('User Registration Sucessful!');
+        console.log(response);
+        this.router.navigate(['/auth/login']);
+      },
+      (err) => {
+        alert('User Registration already registered');
+      }
+    );
   }
 
-  loginUser(req: any){
-    this.http.post<{token: string, user: string, role: string, expiresIn: number }>(this.url+"/login", req)
-      .subscribe(response => {
-        const token  = response.token;
+  loginUser(req: any) {
+    //console.log(req.body.password);
+    this.http
+      .post<{
+        token: string;
+        user: string;
+        role: string;
+        expiresIn: number;
+        message: string;
+      }>(this.url + '/login', req)
+      .subscribe((response) => {
+        const token = response.token;
         this.token = token;
-        const role  = response.role;
+        const role = response.role;
         this.role = role;
-        const user  = response.user;
+        const user = response.user;
         this.user = user;
-        console.log(response.user);
-        if(token){
+        /*
+        const errorMsg  = response.message;
+        this.errMsg = errorMsg;
+        */
+        console.log(response.message);
+        if (response.message == 'Invalid Password' || response.message == 'User not registered!') {
+          if (response.message == 'Invalid Password') {
+            alert('Invalid Password');
+            location.reload();
+          }else if (response.message == 'User not registered!') {
+            alert('Invalid User');
+            location.reload();
+          }
+        }
+        if (token) {
           const expiresInDuration = response.expiresIn;
           this.setAuthTimer(expiresInDuration);
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
           const now = new Date();
-          const expirationDate =  new Date(now.getTime() + expiresInDuration * 1000);
+          const expirationDate = new Date(
+            now.getTime() + expiresInDuration * 1000
+          );
           console.log(expirationDate);
           this.saveAuthData(token, expirationDate);
 
-          if(response.role == "admin"){
+          if (response.role == 'admin') {
             this.router.navigate(['/admin']);
-          }
-          else if(response.role == "student"){
+          } else if (response.role == 'student') {
             this.router.navigate(['/student']);
-          }
-          else if(response.role == "faculty"){
+          } else if (response.role == 'faculty') {
             this.router.navigate(['/faculty']);
           }
         }
-      })
+      });
   }
 
-  autoAuthUser(){
+  autoAuthUser() {
     const authInformation = this.getAuthData();
-    if(!authInformation){
+    if (!authInformation) {
       return;
     }
     const now = new Date();
     const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
-    if(expiresIn > 0){
+    if (expiresIn > 0) {
       this.token = authInformation.token;
       this.isAuthenticated = true;
       this.setAuthTimer(expiresIn / 1000);
@@ -121,39 +145,38 @@ export class AuthService {
     this.router.navigate(['/auth/login']);
   }
 
-  private setAuthTimer(duration: number){
-    console.log("Setting Timer: "+duration);
+  private setAuthTimer(duration: number) {
+    console.log('Setting Timer: ' + duration);
     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date){
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", this.user);
-    localStorage.setItem("role", this.role);
-    localStorage.setItem("expiration", expirationDate.toISOString());
+  private saveAuthData(token: string, expirationDate: Date) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', this.user);
+    localStorage.setItem('role', this.role);
+    localStorage.setItem('expiration', expirationDate.toISOString());
   }
 
-  private clearAuthData(){
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("role");
-    localStorage.removeItem("expiration");
+  private clearAuthData() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('role');
+    localStorage.removeItem('expiration');
   }
 
-  private getAuthData(){
-    const token = localStorage.getItem("token");
-    const expirationDate = localStorage.getItem("expiration");
-    const user = localStorage.getItem("user");
-    if(!token || !expirationDate){
+  private getAuthData() {
+    const token = localStorage.getItem('token');
+    const expirationDate = localStorage.getItem('expiration');
+    const user = localStorage.getItem('user');
+    if (!token || !expirationDate) {
       return;
     }
-    return{
+    return {
       token: token,
       user: user,
-      expirationDate: new Date(expirationDate)
-    }
+      expirationDate: new Date(expirationDate),
+    };
   }
-
 }

@@ -19,7 +19,7 @@
 		  <div class="avatar"><i class="material-icons">&#xE7FF;</i></div>
     	<h4 class="modal-title">Login to Your Account</h4>
       <div class="form-group">
-        <div *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)">
+        <div *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched) || isEmpty">
           <div *ngIf="loginForm.controls['username'].errors?.['required']" class="text-danger">
           **Username is required
           </div>
@@ -37,7 +37,9 @@
 
       <div class="form-group small clearfix">
         <label class="form-check-label"><input type="checkbox"> Remember me</label>
+        <!--
         <a routerLink="/forgot-password" class="forgot-link">Forgot Password?</a>
+        -->
       </div>
       <input type="submit" *ngIf="!isLoading" class="btn btn-primary btn-block btn-lg" value="Login">
     </form>

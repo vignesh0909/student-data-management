@@ -1,4 +1,5 @@
 import { Component, NgModule, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -8,7 +9,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:RouterModule) { }
 
   ngOnInit(): void {
   }
