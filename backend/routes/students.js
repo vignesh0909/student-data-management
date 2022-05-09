@@ -39,20 +39,22 @@ router.get('/', (req, res) => {
   })
 })
 
-
 router.get('/findByRoll/:rollno', (req, res) => {
+  let fetchedStudent;
   var query = {rollno: req.params.rollno};
-  Student.find(query, (err, doc) => {
-    if(err){
-      console.log(doc);
-      console.log('Error in GET student by rollno ' + err);
-    } else {
-      console.log(doc);
-      res.send(doc);
-    }
-  })
-  //return res.status(400).send(`No record found with roll ${req.params.rollno}`);
+  Student.findOne(query)
+    .then((user) => {
+      if(!user){
+        return res.send({
+          message: "User not Found!",
+        });
+      }
+      fetchedStudent = user;
+      //console.log(fetchedStudent);
+      res.send(fetchedStudent);
+    })
 })
+
 
 //PUT(Update) student API
 router.put('/:id', (req, res) => {

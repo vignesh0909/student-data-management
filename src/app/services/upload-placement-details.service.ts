@@ -6,7 +6,7 @@ import { Student } from '../model/student';
   providedIn: 'root'
 })
 export class UploadPersonalDetailsService {
-  url = 'http://localhost:3000/students/placement-details';
+  url = 'http://localhost:3000/students/placements';
   //data: ExcelUploadComponent;
 
   constructor(private http :HttpClient) { }

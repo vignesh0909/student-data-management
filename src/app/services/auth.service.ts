@@ -62,7 +62,8 @@ export class AuthService {
         this.router.navigate(['/auth/login']);
       },
       (err) => {
-        alert('User Registration already registered');
+        alert('User already registered');
+        this.router.navigate(['/auth/login']);
       }
     );
   }

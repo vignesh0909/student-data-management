@@ -4,8 +4,8 @@ export class Student {
   name: string;
   dept: string;
   year: string;
-  sec: string;
-  sem: Number;
+  sem: number;
+  sec: Number;
   phno: string;
   /*
   grades: Array<{

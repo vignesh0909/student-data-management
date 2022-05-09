@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/services/auth.service';
+import { StudentService } from 'app/services/student.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,8 +12,10 @@ export class HeaderComponent implements OnInit {
 
   private authListenerSubs: Subscription;
   userIsAuthenticated = false;
+  user = localStorage.getItem("user");
+  fetchedStudent: any;
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
     this.authListenerSubs = this.authService.getAuthStatusListener().subscribe(
@@ -31,3 +34,4 @@ export class HeaderComponent implements OnInit {
   }
 
 }
+

@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   responsedata: any;
   private authStatusSub!: Subscription;
   subscription: any;
-  role: string[];
   emptyForm: string;
   isEmpty = false;
 

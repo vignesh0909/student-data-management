@@ -7,8 +7,6 @@ import { UploadPlacementDetailsComponent } from './components/upload-placement-d
 import { UploadPersonalDetailsComponent } from './components/upload-personal-details/upload-personal-details.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 
-
-
 const routes: Routes = [
   {
     path: '',

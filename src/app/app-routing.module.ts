@@ -6,10 +6,10 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from "./guards/auth.guard";
 import { PageNotFoundComponent } from './auth/page-not-found/page-not-found.component';
-import { PlacementDetailsComponent } from './placement-details/placement-details/placement-details.component';
 import { AdminGuard } from './guards/admin.guard';
 import { StudentGuard } from './guards/student.guard';
 import { FacultyGuard } from './guards/faculty.guard';
+import { PlacementDetailsComponent } from './placement-details/placement-details.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -34,8 +34,8 @@ const routes: Routes = [
       import('./faculty/faculty.module').then((m) => m.FacultyModule),
   },
   //{ path: "students", component: StudentCreateComponent},
-  { path: 'academic-profile', component: AcademicDetailsComponent },
-  { path: 'placement-profile', component: PlacementDetailsComponent },
+  //{ path: 'academics', component: AcademicDetailsComponent },
+  //{ path: 'placements', component: PlacementDetailsComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: '**', component: PageNotFoundComponent }
 ];

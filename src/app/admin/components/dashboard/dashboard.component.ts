@@ -116,11 +116,4 @@ export class DashboardComponent implements OnInit {
     this.showModal = true;
   }
 
-  onAddAcademicProfile(){
-    this.showModal2 = true;
-  }
-  onAddPlacementProfile(){
-
-  }
-
 }
