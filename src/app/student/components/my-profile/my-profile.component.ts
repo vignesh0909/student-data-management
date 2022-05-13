@@ -25,12 +25,15 @@ export class MyProfileComponent implements OnInit {
     this.stuForm = this.fb.group({
       _id: [''],
       rollno: ['Ex. XXBQXA0XXX', Validators.required],
-      name: ['Ex. Someone', Validators.required],
-      dept: ['CSE'],
-      year: ['I'],
-      sem: ['1'],
-      sec: ['A'],
-      phno: ['9898989898']
+      FullName: ['Ex. Someone', Validators.required],
+      Gender: ['M'],
+      Year: ['I'],
+      Department_Course: [''],
+      StudentAadharNumber: [],
+      FatherName: [],
+      MotherName: [],
+      MobileNumber: ['9898989898'],
+      Email_Id: ['abc@gmail.com']
     })
   }
 

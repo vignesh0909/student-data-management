@@ -16,13 +16,11 @@ import { LoginComponent } from "./auth/login/login.component";
 import { SignupComponent } from "./auth/signup/signup.component";
 import { AuthInterceptor } from "./auth/auth-interceptor";
 import { StudentService } from "./services/student.service";
-import { PlacementDetailsComponent } from "./placement-details/placement-details.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlacementDetailsComponent,
     AcademicDetailsComponent,
     LoginComponent,
     SignupComponent

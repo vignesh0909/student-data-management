@@ -9,7 +9,6 @@ import {
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
-//import { AuthService } from "../../services/auth.service";
 import { AuthService } from 'app/services/auth.service';
 
 @Component({

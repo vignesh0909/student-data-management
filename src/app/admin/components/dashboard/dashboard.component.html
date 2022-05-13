@@ -11,7 +11,7 @@
       <input class="form-control" type="text" name="rollno" [(ngModel)] ="rollno" (ngModelChange)="SearchByRoll()" placeholder="Enter RollNo to search">
     </div>
     <div class="col-md-4 mb-3">
-      <input class="form-control" type="text" name="name" [(ngModel)] ="name" (ngModelChange)="SearchByName()" placeholder="Enter Name to search">
+      <input class="form-control" type="text" name="FullName" [(ngModel)] ="FullName" (ngModelChange)="SearchByName()" placeholder="Enter Name to search">
     </div>
   </div>
   <hr>
@@ -20,20 +20,22 @@
       <div class="card mb-3">
         <div class="card-body bg-light">
           <h5 class="card-title">{{item.rollno}}</h5>
-          <h2 class="card-subtitle mb-2 text-muted">{{item.name}}</h2>
-          <h2 class="card-subtitle mb-2 text-muted">{{item.dept}}</h2>
-          <h5 class="card-title">{{item.year}}</h5>
-          <h5 class="card-title">{{item.sec}}</h5>
-          <h5 class="card-title">{{item.sem}}</h5>
-          <h5 class="card-title">{{item.phno}}</h5>
+          <h2 class="card-subtitle mb-2 text-muted">{{item.FullName}}</h2>
+          <h5 class="card-title">{{item.Year}}</h5>
+          <h2 class="card-subtitle mb-2 text-muted">{{item.Department_Course}}</h2>
+          <h5 class="card-title">{{item.DateofBirth}}</h5>
+          <h5 class="card-title">{{item.MobileNumber}}</h5>
+          <h5 class="card-title">{{item.Email_Id}}</h5>
           <hr>
           <button type="button" class="btn btn-sm btn-outline-primary " (click)="onEditStudent(item)">Edit</button>
           &nbsp;
           <button type="button" class="btn btn-sm btn-outline-danger " (click)="onDeleteStudent(item._id)">Delete</button>
           <hr>
-          <a routerLink="/academic-profile" mat-stroked-button color="primary">Academic Profile <mat-icon>open_in_new</mat-icon> </a>
-          &nbsp;
-          <a routerLink="/placement-profile" mat-stroked-button color="primary">Placement Profile <mat-icon>open_in_new</mat-icon> </a>
+          <div class="d-flex justify-content-center">
+            <a routerLink="/admin/academics" mat-stroked-button color="primary">Academic Profile <mat-icon>open_in_new</mat-icon> </a>
+            &nbsp;
+            <a routerLink="/admin/placements" mat-stroked-button color="primary">Placement Profile <mat-icon>open_in_new</mat-icon> </a>
+          </div>
         </div>
       </div>
     </div>
@@ -59,8 +61,8 @@
 
                   <div class="form-group">
                     <label>Enter Name</label>
-                    <input type="text" class="form-control" formControlName="name">
-                    <small *ngIf="!stuForm.get('name').valid && stuForm.get('name').touched" class="form-text text-danger">Please Enter Name.</small>
+                    <input type="text" class="form-control" formControlName="FullName">
+                    <small *ngIf="!stuForm.get('FullName').valid && stuForm.get('FullName').touched" class="form-text text-danger">Please Enter Name.</small>
                   </div>
 
                   <div class="form-group">

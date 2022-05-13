@@ -14,12 +14,6 @@ export class UploadGradesService {
   constructor(private http :HttpClient) { }
 
   jsonToMongo(req: any){
-    /*
-    for (let x in req) {
-      this.http.post(this.url, req[x]).toPromise()
-      .catch((err:any) => { throw err; });
-    }
-    */
     from(req)
     .pipe(concatMap(item => this.http.post(this.url, item).toPromise()))
     .subscribe();

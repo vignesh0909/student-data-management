@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UploadGradesService } from 'app/services/upload-grades.service';
 import * as XLSX from 'xlsx';
 
@@ -12,8 +13,9 @@ export class UploadGradesComponent implements OnInit {
   convertedJson!: string;
   data: any;
   subscription: any;
+  uploadSuccess: boolean;
 
-  constructor(private gradesUpload: UploadGradesService) { }
+  constructor(private gradesUpload: UploadGradesService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -30,7 +32,12 @@ export class UploadGradesComponent implements OnInit {
       let workbook = XLSX.read(binaryData,{type: 'binary'});
       workbook.SheetNames.forEach(sheet => {
         var data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
+        console.log(data);
         this.gradesUpload.jsonToMongo(data);
+        this.uploadSuccess = true;
+        const dialogRef = this.dialog.open(DialogBox, {
+          width: '250px',
+        });
       })
     }
   }
@@ -39,6 +46,19 @@ export class UploadGradesComponent implements OnInit {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+}
+
+@Component({
+  //selector: 'dialog-overview-example-dialog',
+  templateUrl: 'dialog-box.html',
+})
+export class DialogBox {
+
+  constructor(public dialogRef: MatDialogRef<DialogBox>) {}
+  onOkClick(): void {
+    this.dialogRef.close();
   }
 
 }

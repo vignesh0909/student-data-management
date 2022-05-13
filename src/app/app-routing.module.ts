@@ -9,7 +9,6 @@ import { PageNotFoundComponent } from './auth/page-not-found/page-not-found.comp
 import { AdminGuard } from './guards/admin.guard';
 import { StudentGuard } from './guards/student.guard';
 import { FacultyGuard } from './guards/faculty.guard';
-import { PlacementDetailsComponent } from './placement-details/placement-details.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'auth/login', pathMatch: 'full'},

@@ -18,8 +18,8 @@ export class DashboardComponent implements OnInit {
   showModal2:boolean = false;
   editMode:boolean = false;
   students: Student[];
-  rollno: String;
-  name: String;
+  rollno: string;
+  FullName: String;
 
   constructor(private fb: FormBuilder, private stuService: StudentService) { }
 
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
     this.stuForm = this.fb.group({
       _id: [''],
       rollno: ['Ex. XXBQXA0XXX', Validators.required],
-      name: ['Ex. Someone', Validators.required],
+      FullName: ['Ex. Someone', Validators.required],
       dept: ['CSE'],
       year: ['I'],
       sem: ['1'],
@@ -42,17 +42,17 @@ export class DashboardComponent implements OnInit {
       this.ngOnInit();
     }else{
       this.students = this.students.filter(res => {
-          return res.rollno.toLocaleLowerCase().match(this.rollno.toLocaleLowerCase());
+          return res.rollno?.toLocaleLowerCase().match(this.rollno?.toLocaleLowerCase());
       })
     }
   }
 
   SearchByName(){
-    if(this.name == ""){
+    if(this.FullName == ""){
       this.ngOnInit();
     }else{
       this.students = this.students.filter(res => {
-        return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase());
+        return res.FullName.toLocaleLowerCase().match(this.FullName.toLocaleLowerCase());
       })
     }
   }

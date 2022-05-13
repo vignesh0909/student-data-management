@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+//const uniqueValidator = require("mongoose-unique-validator");
 
-const Placements = mongoose.model('Placements', {
+const userSchema = mongoose.Schema({
   rollno: { type: String, required: true },
-  placed: {type:Array},
-  package: {type: String}
+  company: {type: String, required: true},
+  package: {type: String, required: true}
 });
 
-module.exports = Placements;
+//userSchema.plugin(uniqueValidator);
+module.exports = mongoose.model("Placements", userSchema);

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { UploadPersonalDetailsService } from 'app/services/upload-personal-details.service';
 import * as XLSX from 'xlsx';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-upload-personal-details',
@@ -15,7 +15,7 @@ export class UploadPersonalDetailsComponent implements OnInit {
   subscription: any;
   uploadSuccess: any;
 
-  constructor(private personalUpload: UploadPersonalDetailsService) { }
+  constructor(private personalUpload: UploadPersonalDetailsService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -33,11 +33,12 @@ export class UploadPersonalDetailsComponent implements OnInit {
       workbook.SheetNames.forEach(sheet => {
         var data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
         console.log(data);
-        this.convertedJson = JSON.stringify(data,undefined,4);
         this.personalUpload.jsonToMongo(data);
         this.uploadSuccess = true;
+        const dialogRef = this.dialog.open(DialogBox, {
+          width: '250px',
+        });
       })
-      //console.log(workbook);
     }
   }
 
@@ -45,6 +46,19 @@ export class UploadPersonalDetailsComponent implements OnInit {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+}
+
+@Component({
+  //selector: 'dialog-overview-example-dialog',
+  templateUrl: 'dialog-box.html',
+})
+export class DialogBox {
+
+  constructor(public dialogRef: MatDialogRef<DialogBox>) {}
+  onOkClick(): void {
+    this.dialogRef.close();
   }
 
 }

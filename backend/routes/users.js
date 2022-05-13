@@ -3,7 +3,6 @@ const router = express.Router();
 const ObjectId = require("mongoose").Types.ObjectId;
 const Users = require("../models/users.js");
 const bcrypt = require("bcrypt");
-const { result } = require("lodash");
 const jwt = require("jsonwebtoken");
 
 //POST student on signup API(Registration)

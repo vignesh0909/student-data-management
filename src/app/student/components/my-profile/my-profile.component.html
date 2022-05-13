@@ -17,7 +17,7 @@
   </div>
   <div fxLayout="row wrap" class="col d-flex justify-content-center m-5" fxLayoutGap="16px grid">
 
-    <div fxFlex="35%" fxFlex.xs="100%" fxFlex.sm="33%">
+    <div fxFlex="35%" fxFlex.xs="100%" fxFlex.sm="50%">
       <mat-card class="mat-elevation-z6" >
         <div class="card-header">
           <div class="d-flex justify-content-center">
@@ -28,29 +28,28 @@
         <mat-card-header>
           <div class="col-md-4">
             <mat-card-title>
-              {{fetchedStudent.name}}
+              {{fetchedStudent.FullName}}
             </mat-card-title>
             <div>
               <p class="lead">
-                {{fetchedStudent.year}}
-                {{fetchedStudent.dept}}
-                {{fetchedStudent.sec}}
+                {{fetchedStudent.Year}}
+                {{fetchedStudent.Department_Course}}
               </p>
             </div>
           </div>
           <mat-card-content>
-            <div class="col">
-              <p class="lead para">
-                {{fetchedStudent.phno}}
-              </p>
+            <div class="col md-4">
+              <p class="lead para">{{fetchedStudent.DateofBirth}}</p>
+              <p class="lead para">{{fetchedStudent.MobileNumber}}</p>
+              <p class="lead para">{{fetchedStudent.Email_Id}}</p>
             </div>
           </mat-card-content>
         </mat-card-header>
         <mat-card-actions>
           <hr>
           <div class="card-body d-flex justify-content-center">
-            <a routerLink="/student/academics" class="card-link btn btn-primary">Academic Profile</a>
-            <a routerLink="/student/placements" class="card-link btn btn-primary">Placement Profile</a>
+            <button routerLink="/student/academics" class="card-link btn btn-primary btn-sm">Academic Profile</button>
+            <button routerLink="/student/placements" class="card-link btn btn-primary btn-sm">Placement Profile</button>
           </div>
         </mat-card-actions>
       </mat-card>
@@ -77,60 +76,58 @@
 
                     <div class="form-group">
                       <label>Enter Name</label>
-                      <input type="text" class="form-control" formControlName="name">
-                      <small *ngIf="!stuForm.get('name').valid && stuForm.get('name').touched" class="form-text text-danger">Please Enter Name.</small>
+                      <input type="text" class="form-control" formControlName="FullName">
+                      <small *ngIf="!stuForm.get('FullName').valid && stuForm.get('FullName').touched" class="form-text text-danger">Please Enter Name.</small>
                     </div>
 
                     <div class="form-group">
-                        <label>Select Department</label>
-                        <select class="custom-select" formControlName="dept">
-                            <option value="CSE">CSE</option>
-                            <option value="ECE">ECE</option>
-                            <option value="EEE">EEE</option>
-                            <option value="MECH">MECH</option>
-                            <option value="CE">CE</option>
-                            <option value="IT">IT</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Select Year</label>
-                        <select class="custom-select" formControlName="year">
-                            <option value="I">I</option>
-                            <option value="II">II</option>
-                            <option value="III">III</option>
-                            <option value="IV">IV</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Select Sem</label>
-                      <select class="custom-select" formControlName="sec">
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="2">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
+                      <label>Select Gender</label>
+                      <select class="custom-select" formControlName="Gender">
+                          <option value="Male">M</option>
+                          <option value="Female">F</option>
                       </select>
                     </div>
 
                     <div class="form-group">
-                      <label>Select Section</label>
-                      <select class="custom-select" formControlName="sec">
-                          <option value="A">A</option>
-                          <option value="B">B</option>
-                          <option value="C">C</option>
-                          <option value="D">D</option>
+                      <label>Select Year</label>
+                      <select class="custom-select" formControlName="Year">
+                          <option value="I">I</option>
+                          <option value="II">II</option>
+                          <option value="III">III</option>
+                          <option value="IV">IV</option>
                       </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Department and Section</label>
+                        <select class="custom-select" formControlName="Department_Course">
+                            <option value="CSE">CSE-A</option>
+                            <option value="CSE">CSE-B</option>
+                            <option value="CSE">CSE-C</option>
+                            <option value="CSE">CSE-D</option>
+                            <option value="ECE">ECE-A</option>
+                            <option value="ECE">ECE-B</option>
+                            <option value="ECE">ECE-C</option>
+                            <option value="ECE">ECE-D</option>
+                            <option value="EEE">EEE-A</option>
+                            <option value="EEE">EEE-B</option>
+                            <option value="EEE">EEE-C</option>
+                            <option value="MECH">MECH-A</option>
+                            <option value="MECH">MECH-B</option>
+                            <option value="MECH">MECH-C</option>
+                            <option value="CE">CE-A</option>
+                            <option value="CE">CE-B</option>
+                            <option value="CE">CE-C</option>
+                            <option value="IT">IT-A</option>
+                            <option value="IT">IT-B</option>
+                            <option value="IT">IT-C</option>
+                        </select>
                     </div>
 
                   <div class="form-group">
                     <label>Enter PhNo</label>
-                    <input type="text" class="form-control" formControlName="phno">
-                    <small *ngIf="!stuForm.get('phno').valid && stuForm.get('phno').touched" class="form-text text-danger">Please Enter Phone Number.</small>
+                    <input type="text" class="form-control" formControlName="MobileNumber">
+                    <small *ngIf="!stuForm.get('MobileNumber').valid && stuForm.get('MobileNumber').touched" class="form-text text-danger">Please Enter Phone Number.</small>
                   </div>
 
                 </div>

@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
-import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { PlacementDetailsComponent } from './components/placement-details/placement-details.component';
+import { AcademicDetailsComponent } from './components/academic-details/academic-details.component';
 
 
 
@@ -14,9 +15,10 @@ const routes: Routes = [
     children: [
       { path: '', component: WelcomePageComponent },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'my-profile', component: MyProfileComponent },
       //{ path: 'home', component: HomeComponent },
-      {path: '', redirectTo: '/faculty', pathMatch: 'full'}
+      {path: '', redirectTo: '/faculty', pathMatch: 'full'},
+      {path: 'academics', component: AcademicDetailsComponent },
+      {path: 'placements', component: PlacementDetailsComponent }
     ],
   },
 ];

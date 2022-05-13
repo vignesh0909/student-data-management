@@ -69,7 +69,7 @@ export class AuthService {
   }
 
   loginUser(req: any) {
-    //console.log(req.body.password);
+    //console.log(req);
     this.http
       .post<{
         token: string;

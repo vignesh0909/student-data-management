@@ -1,26 +1,14 @@
 export class Student {
   _id: any;
   rollno: string;
-  name: string;
-  dept: string;
-  year: string;
-  sem: number;
-  sec: Number;
-  phno: string;
-  /*
-  grades: Array<{
-    subject: String,
-    sem: Number,
-    grade: String,
-    credits: Number,
-    sgpa: Number,
-    cgpa: Number,
-  }>;
-  placements: {
-    status: String,
-    batch: Number,
-    enrolled: Array<String>,
-    placed: Array<String>
-  }
-  */
+  FullName: string;
+  Gender: string;
+  Year: string;
+  Department_Course: string;
+  DateofBirth: string;
+  StudentAadharNumber: Number;
+  FatherName: string;
+  MotherName: string;
+  MobileNumber: Number;
+  Email_Id: string;
 }

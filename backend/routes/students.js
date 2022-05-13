@@ -1,28 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const ObjectId = require('mongoose').Types.ObjectId;
-const Student = require("../models/student.js");
-const checkAuth = require("../middleware/check-auth");
+const Students = require("../models/students.js");
 
 //POST student API
 router.post('/', (req, res) => {
-  let stu = new Student({
+  let stu = new Students({
     rollno: req.body.rollno,
-    name: req.body.name,
-    dept: req.body.dept,
-    year: req.body.year,
-    sem: req.body.sem,
-    sec: req.body.sec,
-    phno: req.body.phno,
-    //grades: req.body.grades,
-    //placements: req.body.placements
+    FullName: req.body.FullName,
+    Gender: req.body.Gender,
+    Year: req.body.Year,
+    Department_Course: req.body.Department_Course,
+    StudentAadharNumber: req.body.StudentAadharNumber,
+    FatherName: req.body.FatherName,
+    MotherName: req.body.MotherName,
+    MobileNumber: req.body.MobileNumber,
+    Email_Id: req.body.Email_Id
   });
 
   stu.save((err,doc) => {
     if(err){
       console.log('Error in post data'+err);
     } else{
-      //console.log(doc[0]);
+      //console.log(doc);
       res.send(doc);
     }
   })
@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
 
 //GET all students API
 router.get('/', (req, res) => {
-  Student.find((err, doc) => {
+  Students.find((err, doc) => {
       if(err){
           console.log('Error in GET Data ' + err);
       } else {
@@ -42,7 +42,7 @@ router.get('/', (req, res) => {
 router.get('/findByRoll/:rollno', (req, res) => {
   let fetchedStudent;
   var query = {rollno: req.params.rollno};
-  Student.findOne(query)
+  Students.findOne(query)
     .then((user) => {
       if(!user){
         return res.send({
@@ -61,13 +61,13 @@ router.put('/:id', (req, res) => {
   if(ObjectId.isValid(req.params.id)){
     let stu = {
       rollno: req.body.rollno,
-      name: req.body.name,
-      dept: req.body.dept,
-      year: req.body.year,
-      sec: req.body.sec,
-      phno: req.body.phno
+      FullName: req.body.FullName,
+      Department_Course: req.body.Department_Course,
+      Year: req.body.Year,
+      MobileNumber: req.body.MobileNumber,
+      Email_Id: req.body.Email_Id
     }
-    Student.findByIdAndUpdate(req.params.id, {$set :stu}, {new: true},(err, doc) => {
+    Students.findByIdAndUpdate(req.params.id, {$set :stu}, {new: true},(err, doc) => {
       if(err){
         console.log('Error in UPDATE student by Id ' + err);
       } else {
@@ -82,7 +82,7 @@ router.put('/:id', (req, res) => {
 //Delete single student using Id
 router.delete('/:id', (req, res) => {
   if(ObjectId.isValid(req.params.id)){
-    Student.findByIdAndRemove(req.params.id, (err, doc) => {
+    Students.findByIdAndRemove(req.params.id, (err, doc) => {
       if(err){
         console.log('Error in DELETE student by Id ' + err);
       } else {

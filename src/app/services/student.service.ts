@@ -31,4 +31,13 @@ export class StudentService {
     return this.http.put(`${this.url}/${stu._id}`, stu);
   }
 
+  getAcademicProfile(roll: any){
+    return this.http.get<any>(`${this.url}grades/${roll}`);
+  }
+
+  getPlacementProfile(roll: any){
+    console.log(roll);
+    return this.http.get<any>(`${this.url}placements/${roll}`);
+  }
+
 }
