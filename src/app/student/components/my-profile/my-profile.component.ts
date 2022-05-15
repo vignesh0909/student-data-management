@@ -15,7 +15,6 @@ export class MyProfileComponent implements OnInit {
   showModal:boolean = false;
   stuForm : FormGroup;
   fetchedStudent: any;
-
   constructor(private fb: FormBuilder, private stuService: StudentService) { }
 
   user = localStorage.getItem("user");
@@ -40,7 +39,7 @@ export class MyProfileComponent implements OnInit {
   studentProfile(): void {
     this.stuService.getStudent(this.user.slice(0,10).toUpperCase()).subscribe((res) => {
       this.fetchedStudent = res;
-      //console.log(res);
+      //console.log(this.fetchedStudent.rollno);
     })
   }
 

@@ -62,8 +62,12 @@ router.put('/:id', (req, res) => {
     let stu = {
       rollno: req.body.rollno,
       FullName: req.body.FullName,
-      Department_Course: req.body.Department_Course,
+      Gender: req.body.Gender,
       Year: req.body.Year,
+      Department_Course: req.body.Department_Course,
+      StudentAadharNumber: req.body.StudentAadharNumber,
+      FatherName: req.body.FatherName,
+      MotherName: req.body.MotherName,
       MobileNumber: req.body.MobileNumber,
       Email_Id: req.body.Email_Id
     }

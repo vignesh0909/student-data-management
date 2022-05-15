@@ -1,141 +1,93 @@
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+<!-- Font Awesome CSS -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
+
+
 <div class="card hovercard">
   <div class="card-background">
-      <img class="card-bkimg" alt="" src="https://bit.ly/3vP3nQz">
+    <img class="card-bkimg" alt="" src="https://bit.ly/3vP3nQz">
 
   </div>
   <div class="useravatar">
-      <img alt="" src="https://bit.ly/3vP3nQz">
+    <img alt="" src="https://bit.ly/3vP3nQz">
   </div>
   <div class="card-info"> <span class="card-title">Welcome {{ user.slice(0,10).toUpperCase() }}</span>
-
   </div>
 </div>
 
-<div class="content">
-  <div class="d-flex justify-content-center m-3">
-    <button type="button" class="btn btn-sm btn-success " (click)="onEditStudent(fetchedStudent)">Edit Details</button>
-  </div>
-  <div fxLayout="row wrap" class="col d-flex justify-content-center m-5" fxLayoutGap="16px grid">
 
-    <div fxFlex="35%" fxFlex.xs="100%" fxFlex.sm="50%" fxFlex.md="50%">
-      <mat-card class="mat-elevation-z6" >
-        <div class="card-header">
-          <div class="d-flex justify-content-center">
-            <p class="rollno">{{fetchedStudent.rollno}}</p>
+<div class="d-flex justify-content-center py-4">
+  <button type="button" class="btn btn-sm btn-success " (click)="onEditStudent(fetchedStudent)">Edit Details</button>
+</div>
+
+
+<div class="student-profile py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-transparent text-center">
+            <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+            <h3>{{fetchedStudent.FullName}}</h3>
+          </div>
+          <div class="card-body">
+            <p class="mb-0 m-1"><strong class="pr-1">ID:</strong>{{fetchedStudent._id}}</p>
+            <p class="mb-0 m-1"><strong class="pr-1">Year:</strong>{{fetchedStudent.Year}}</p>
+            <p class="mb-0 m-1"><strong class="pr-1">Department & Section:</strong>{{fetchedStudent.Department_Course}}
+            </p>
           </div>
         </div>
-        <br>
-        <mat-card-header>
-          <div class="col-md-4">
-            <mat-card-title>
-              {{fetchedStudent.FullName}}
-            </mat-card-title>
-            <div>
-              <p class="lead">
-                {{fetchedStudent.Year}}
-                {{fetchedStudent.Department_Course}}
-              </p>
-            </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-transparent border-0">
+            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
           </div>
-          <mat-card-content>
-            <div class="col md-4">
-              <p class="lead para">{{fetchedStudent.DateofBirth}}</p>
-              <p class="lead para">{{fetchedStudent.MobileNumber}}</p>
-              <p class="lead para">{{fetchedStudent.Email_Id}}</p>
-            </div>
-          </mat-card-content>
-        </mat-card-header>
-        <mat-card-actions>
-          <hr>
-          <div class="card-body d-flex justify-content-center">
-            <button routerLink="/student/academics" class="card-link btn btn-primary btn-sm">Academic Profile</button>
-            <button routerLink="/student/placements" class="card-link btn btn-primary btn-sm">Placement Profile</button>
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr>
+                <th width="30%">Roll No</th>
+                <td width="2%">:</td>
+                <td>{{fetchedStudent.rollno}}</td>
+              </tr>
+              <tr>
+                <th width="30%">Batch </th>
+                <td width="2%">:</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th width="30%">Gender</th>
+                <td width="2%">:</td>
+                <td>{{fetchedStudent.Gender}}</td>
+              </tr>
+              <tr>
+                <th width="30%">Mobile</th>
+                <td width="2%">:</td>
+                <td>{{fetchedStudent.MobileNumber}}</td>
+              </tr>
+              <tr>
+                <th width="30%">Email</th>
+                <td width="2%">:</td>
+                <td>{{fetchedStudent.Email_Id}}</td>
+              </tr>
+            </table>
           </div>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </div>
-  </div>
-
-  <div class="modal fade show" [class.show]="showModal">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Update Student</h5>
-                <button (click)="onCloseModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form [formGroup]="stuForm" (ngSubmit)="onStuSubmit()">
-                <div class="modal-body">
-                    <div class="form-group">
-                      <label for="validationServer01">Enter Rollno</label>
-                      <input type="text" class="form-control" id="validationServer01" formControlName="rollno" required>
-                      <small *ngIf="!stuForm.get('rollno').valid && stuForm.get('rollno').touched" class="form-text text-danger is-valid">Please Enter Rollno.</small>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Enter Name</label>
-                      <input type="text" class="form-control" formControlName="FullName">
-                      <small *ngIf="!stuForm.get('FullName').valid && stuForm.get('FullName').touched" class="form-text text-danger">Please Enter Name.</small>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Select Gender</label>
-                      <select class="custom-select" formControlName="Gender">
-                          <option value="Male">M</option>
-                          <option value="Female">F</option>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Select Year</label>
-                      <select class="custom-select" formControlName="Year">
-                          <option value="I">I</option>
-                          <option value="II">II</option>
-                          <option value="III">III</option>
-                          <option value="IV">IV</option>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Select Department and Section</label>
-                        <select class="custom-select" formControlName="Department_Course">
-                            <option value="CSE">CSE-A</option>
-                            <option value="CSE">CSE-B</option>
-                            <option value="CSE">CSE-C</option>
-                            <option value="CSE">CSE-D</option>
-                            <option value="ECE">ECE-A</option>
-                            <option value="ECE">ECE-B</option>
-                            <option value="ECE">ECE-C</option>
-                            <option value="ECE">ECE-D</option>
-                            <option value="EEE">EEE-A</option>
-                            <option value="EEE">EEE-B</option>
-                            <option value="EEE">EEE-C</option>
-                            <option value="MECH">MECH-A</option>
-                            <option value="MECH">MECH-B</option>
-                            <option value="MECH">MECH-C</option>
-                            <option value="CE">CE-A</option>
-                            <option value="CE">CE-B</option>
-                            <option value="CE">CE-C</option>
-                            <option value="IT">IT-A</option>
-                            <option value="IT">IT-B</option>
-                            <option value="IT">IT-C</option>
-                        </select>
-                    </div>
-
-                  <div class="form-group">
-                    <label>Enter PhNo</label>
-                    <input type="text" class="form-control" formControlName="MobileNumber">
-                    <small *ngIf="!stuForm.get('MobileNumber').valid && stuForm.get('MobileNumber').touched" class="form-text text-danger">Please Enter Phone Number.</small>
-                  </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" (click)="onCloseModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update Student</button>
-                </div>
-            </form>
         </div>
+        <div style="height: 26px"></div>
+        <div class="card shadow-sm">
+          <div class="card-header bg-transparent border-0">
+            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3>
+            <div class="card-body d-flex justify-content-center">
+              <button routerLink="/student/academics" class="card-link btn btn-primary btn-sm">Academic Profile</button>
+              <button routerLink="/student/placements" class="card-link btn btn-primary btn-sm">Placement
+                Profile</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>
