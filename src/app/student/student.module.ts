@@ -27,9 +27,7 @@ import { WelcomePageComponent } from './components/welcome-page/welcome-page.com
     AngularMaterialModule,
     FlexLayoutModule,
   ],
-  providers: [
-    HeaderComponent,
-  ]
+  providers: [HeaderComponent]
 })
 
 export class StudentModule{
