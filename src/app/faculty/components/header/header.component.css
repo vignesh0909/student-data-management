@@ -13,6 +13,11 @@ a {
   color: white;
 }
 
+a:hover {
+  text-decoration: none;
+  color: white;
+}
+
 ul {
   display: flex;
 }
@@ -53,6 +58,10 @@ a{
   text-decoration: none;
   font-size: 110%;
   white-space: normal;
+}
+
+a hover{
+  text-decoration: none;
 }
 
 button{

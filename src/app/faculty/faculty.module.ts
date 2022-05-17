@@ -12,6 +12,7 @@ import { PlacementDetailsComponent } from './components/placement-details/placem
 import { AcademicDetailsComponent } from './components/academic-details/academic-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatMenuModule} from '@angular/material/menu';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MatMenuModule} from '@angular/material/menu';
     AngularMaterialModule,
     FlexLayoutModule,
     NgxPaginationModule,
-    MatMenuModule
+    MatMenuModule,
+    Ng2SearchPipeModule
   ],
 })
 

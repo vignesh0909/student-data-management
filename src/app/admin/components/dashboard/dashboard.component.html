@@ -4,7 +4,7 @@
 
 
 
-<div class="container">
+<div class="container bg-light bg-gradient">
 
   <div class="col d-flex justify-content-center m-2">
     <h2>Student Dashboard</h2>
@@ -15,12 +15,8 @@
       <h2 class="font-weight-bold">Search Student</h2>
     </div>
     <div class="col-md-4 mb-3">
-      <input class="form-control" type="text" name="rollno" [(ngModel)]="rollno" (ngModelChange)="SearchByRoll()"
-        placeholder="Enter RollNo to search">
-    </div>
-    <div class="col-md-4 mb-3">
-      <input class="form-control" type="text" name="FullName" [(ngModel)]="FullName" (ngModelChange)="SearchByName()"
-        placeholder="Enter Name to search">
+      <input class="form-control" type="text"  [(ngModel)]="search"
+        placeholder="Enter RollNo/Name to search">
     </div>
   </div>
   <hr>
@@ -35,7 +31,7 @@
 
   <div class="row">
     <div class="col-sm-6 col-md-4"
-      *ngFor="let item of students | paginate: {id: 'listing_pagination', itemsPerPage: 9, currentPage: page, totalItems: totalRecords}">
+      *ngFor="let item of students | filter: search | paginate: {id: 'listing_pagination', itemsPerPage: 9, currentPage: page, totalItems: totalRecords}">
       <div class="div-box">
         <div class="d-flex justify-content-end">
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
@@ -47,22 +43,22 @@
         <div class="card-body pt-0">
           <table class="table table-bordered">
             <tr>
-              <th width="30%">Class </th>
+              <th width="15%">Class </th>
               <td width="2%">:</td>
               <td>{{ item.Year }} {{ item.Department_Course }}</td>
             </tr>
             <tr>
-              <th width="30%">Gender</th>
+              <th width="15%">Gender</th>
               <td width="2%">:</td>
               <td>{{item.Gender}}</td>
             </tr>
             <tr>
-              <th width="30%">Mobile</th>
+              <th width="15%">Mobile</th>
               <td width="2%">:</td>
               <td>{{item.MobileNumber}}</td>
             </tr>
             <tr>
-              <th width="30%">Email</th>
+              <th width="15%">Email</th>
               <td width="2%">:</td>
               <td>{{item.Email_Id}}</td>
             </tr>
@@ -170,10 +166,18 @@
             <small *ngIf="!stuForm.get('MobileNumber').valid && stuForm.get('MobileNumber').touched"
               class="form-text text-danger">Please Enter Phone Number.</small>
           </div>
+
+          <div class="form-group">
+            <label>Enter Email</label>
+            <input type="text" class="form-control" formControlName="Email_Id">
+            <small *ngIf="!stuForm.get('Email_Id').valid && stuForm.get('Email_Id').touched"
+              class="form-text text-danger">Please Enter Email Id.</small>
+          </div>
         </div>
+
         <div class="modal-footer">
           <button type="button" (click)="onCloseModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Update Student</button>
+          <button type="submit" class="btn btn-primary" (click)="onCloseModal()">Update Student</button>
         </div>
       </form>
     </div>

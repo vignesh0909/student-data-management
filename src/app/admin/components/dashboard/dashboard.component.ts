@@ -1,7 +1,5 @@
-import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, NgZone } from '@angular/core';
-import { timer } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Student } from 'app/model/student';
 import { StudentService } from 'app/services/student.service';
 
@@ -12,11 +10,10 @@ import { StudentService } from 'app/services/student.service';
 })
 export class DashboardComponent implements OnInit {
   stuForm: FormGroup;
-  showModal: boolean = false;
   editMode: boolean = false;
+  showModal: boolean = false;
   students: Student[];
-  rollno: string;
-  FullName: String;
+  search: any;
   totalRecords: any;
   page: any = 1;
 
@@ -37,30 +34,6 @@ export class DashboardComponent implements OnInit {
       MobileNumber: ['9898989898'],
       Email_Id: ['abc@gmail.com'],
     });
-  }
-
-  SearchByRoll() {
-    if (this.rollno == '') {
-      this.ngOnInit();
-    } else {
-      this.students = this.students.filter((res) => {
-        return res.rollno
-          ?.toLocaleLowerCase()
-          .match(this.rollno?.toLocaleLowerCase());
-      });
-    }
-  }
-
-  SearchByName() {
-    if (this.FullName == '') {
-      this.ngOnInit();
-    } else {
-      this.students = this.students.filter((res) => {
-        return res.FullName.toLocaleLowerCase().match(
-          this.FullName.toLocaleLowerCase()
-        );
-      });
-    }
   }
 
   getStudents() {
@@ -86,30 +59,22 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  onEditStudent(stu: Student) {
+  onEditStudent(req: any) {
+    this.editMode = true;
     this.showModal = true;
-    this.stuForm.patchValue(stu);
+    this.stuForm.patchValue(req);
   }
 
   onStuSubmit() {
+    console.log(this.editMode);
     if (this.stuForm.valid) {
-      if (this.editMode) {
-        this.stuService.updateStudent(this.stuForm.value).subscribe(
-          (res) => {
-            this.getStudents();
-            this.onCloseModal();
-          },
-          (err) => console.log(err)
-        );
-      } else {
-        this.stuService.addStudent(this.stuForm.value).subscribe(
-          (res) => {
-            this.getStudents();
-            this.onCloseModal();
-          },
-          (err) => console.log(err)
-        );
-      }
+      this.stuService.updateStudent(this.stuForm.value).subscribe(
+        (res) => {
+          this.getStudents();
+          this.onCloseModal();
+        },
+        (err) => console.log(err)
+      );
     } else {
       console.log('Student already exits!');
     }
@@ -123,6 +88,4 @@ export class DashboardComponent implements OnInit {
   clickedStudent(req: any) {
     localStorage.setItem('currentUser', req);
   }
-
-  editDelete() {}
 }

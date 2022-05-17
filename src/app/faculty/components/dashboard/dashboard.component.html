@@ -1,84 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
 
-<head>
-  <title>Dashboard user profile page design using Bootstrap 4</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+<div class="container">
 
-
-<body>
-  <div class="container">
-
-    <div class="col d-flex justify-content-center m-2">
-      <h2>Student Dashboard</h2>
+  <div class="col d-flex justify-content-center m-2">
+    <h2>Student Dashboard</h2>
+  </div>
+  <hr>
+  <div class="row justify-content-center">
+    <div class="col-md-4 mb-3">
+      <h2 class="font-weight-bold">Search Student</h2>
     </div>
-    <hr>
-    <div class="row justify-content-center">
-      <div class="col-md-4 mb-3">
-        <h2 class="font-weight-bold">Search Student</h2>
-      </div>
-      <div class="col-md-4 mb-3">
-        <input class="form-control" type="text" name="rollno" [(ngModel)]="rollno" (ngModelChange)="SearchByRoll()"
-          placeholder="Enter RollNo to search">
-      </div>
-      <div class="col-md-4 mb-3">
-        <input class="form-control" type="text" name="FullName" [(ngModel)]="FullName" (ngModelChange)="SearchByName()"
-          placeholder="Enter Name to search">
-      </div>
-    </div>
-    <hr>
-
-    <div>
-      <pagination-controls class="text-center my-pagination" id="listing_pagination" (pageChange)="page = $event" (pageBoundsCorrection)="page($event)"
-        [maxSize]="9" [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Previous"
-        nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
-        screenReaderCurrentLabel="You're on page">
-      </pagination-controls>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6 col-md-4"
-        *ngFor="let item of students | paginate: {id: 'listing_pagination', itemsPerPage: 9, currentPage: page, totalItems: totalRecords}">
-        <div class="div-box">
-          <div class="d-flex justify-content-end">
-            <button mat-button [matMenuTriggerFor]="menu" (click)="editDelete()">
-              <span class="glyphicon glyphicon-option-vertical"></span>
-            </button>
-          </div>
-          <h3 class="User-name text-primary">{{ item.rollno }}</h3>
-          <h4 class="designation">{{ item.FullName }}</h4>
-          <div class="profile-details">
-            <ul>
-              <li><a><i class="fas"></i>{{ item.Year }} {{ item.Department_Course }}</a></li>
-              <li><a><i class="fas">{{ item.MobileNumber }}</i> </a></li>
-              <p class="designation">{{ item.Email_Id }}</p>
-            </ul>
-          </div>
-          <div class="contact-btn">
-            <button routerLink="/faculty/academics" type="button" class="btn btn-sm btn-success" (click)="clickedStudent(item.rollno)">Academics</button>
-            <button routerLink="/faculty/placements" type="button" class="btn btn-sm btn-secondary" (click)="clickedStudent(item.rollno)">Placements</button>
-          </div>
-        </div>
-        <mat-menu #menu="matMenu">
-          <button type="button" mat-menu-item (click)="onEditStudent(item)"><span>Edit</span></button>
-          <button type="button" mat-menu-item (click)="onDeleteStudent(item._id)">Delete</button>
-        </mat-menu>
-      </div>
+    <div class="col-md-4 mb-3">
+      <input class="form-control" type="text"  [(ngModel)]="search"
+        placeholder="Enter RollNo/Name to search">
     </div>
   </div>
-</body>
-</html>
+  <hr>
 
+  <div>
+    <pagination-controls class="text-center my-pagination" id="listing_pagination" (pageChange)="page = $event"
+      (pageBoundsCorrection)="page($event)" [maxSize]="9" [directionLinks]="true" [autoHide]="true" [responsive]="true"
+      previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+      screenReaderCurrentLabel="You're on page">
+    </pagination-controls>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-md-4"
+      *ngFor="let item of students | filter: search | paginate: {id: 'listing_pagination', itemsPerPage: 9, currentPage: page, totalItems: totalRecords}">
+      <div class="div-box">
+        <div class="d-flex justify-content-end">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+        <h3 class="User-name text-primary">{{ item.rollno }}</h3>
+        <h4 class="designation">{{ item.FullName }}</h4>
+        <div class="profile-details">
+          <ul>
+            <li><a>{{ item.Year }} {{ item.Department_Course }}</a></li>
+            <li><a><i class="fas">{{ item.MobileNumber }}</i> </a></li>
+            <p class="designation">{{ item.Email_Id }}</p>
+          </ul>
+        </div>
+        <div class="contact-btn">
+          <button routerLink="/faculty/academics" type="button" class="btn btn-sm btn-success"
+            (click)="clickedStudent(item.rollno)">Academics</button>
+          <button routerLink="/faculty/placements" type="button" class="btn btn-sm btn-secondary"
+            (click)="clickedStudent(item.rollno)">Placements</button>
+        </div>
+      </div>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onEditStudent(item)">
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+        <button mat-menu-item (click)="onDeleteStudent(item._id)">
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</div>
 
 
 
@@ -87,82 +73,93 @@
 <!--Modal-->
 <div class="modal fade" [class.show]="showModal">
   <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title">Update Student</h5>
-              <button (click)="onCloseModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <form [formGroup]="stuForm" (ngSubmit)="onStuSubmit()">
-              <div class="modal-body">
-                  <div class="form-group">
-                    <label for="validationServer01">Enter Rollno</label>
-                    <input type="text" class="form-control" id="validationServer01" formControlName="rollno" required>
-                    <small *ngIf="!stuForm.get('rollno').valid && stuForm.get('rollno').touched" class="form-text text-danger is-valid">Please Enter Rollno.</small>
-                  </div>
-
-                  <div class="form-group">
-                    <label>Enter Name</label>
-                    <input type="text" class="form-control" formControlName="FullName">
-                    <small *ngIf="!stuForm.get('FullName').valid && stuForm.get('FullName').touched" class="form-text text-danger">Please Enter Name.</small>
-                  </div>
-
-                  <div class="form-group">
-                    <label>Select Gender</label>
-                    <select class="custom-select" formControlName="Gender">
-                        <option value="M">M</option>
-                        <option value="F">F</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label>Select Year</label>
-                    <select class="custom-select" formControlName="Year">
-                        <option value="I">I</option>
-                        <option value="II">II</option>
-                        <option value="III">III</option>
-                        <option value="IV">IV</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                      <label>Select Department and Section</label>
-                      <select class="custom-select" formControlName="Department_Course">
-                          <option value="CSE-A">CSE-A</option>
-                          <option value="CSE-B">CSE-B</option>
-                          <option value="CSE-C">CSE-C</option>
-                          <option value="CSE-D">CSE-D</option>
-                          <option value="ECE-A">ECE-A</option>
-                          <option value="ECE-B">ECE-B</option>
-                          <option value="ECE-C">ECE-C</option>
-                          <option value="ECE-D">ECE-D</option>
-                          <option value="EEE-A">EEE-A</option>
-                          <option value="EEE-B">EEE-B</option>
-                          <option value="EEE-C">EEE-C</option>
-                          <option value="MECH-A">MECH-A</option>
-                          <option value="MECH-B">MECH-B</option>
-                          <option value="MECH-C">MECH-C</option>
-                          <option value="CE-A">CE-A</option>
-                          <option value="CE-B">CE-B</option>
-                          <option value="CE-C">CE-C</option>
-                          <option value="IT-A">IT-A</option>
-                          <option value="IT-B">IT-B</option>
-                          <option value="IT-C">IT-C</option>
-                      </select>
-                  </div>
-
-                <div class="form-group">
-                  <label>Enter PhNo</label>
-                  <input type="text" class="form-control" formControlName="MobileNumber">
-                  <small *ngIf="!stuForm.get('MobileNumber').valid && stuForm.get('MobileNumber').touched" class="form-text text-danger">Please Enter Phone Number.</small>
-                </div>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" (click)="onCloseModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Update Student</button>
-              </div>
-          </form>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Student</h5>
+        <button (click)="onCloseModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <form [formGroup]="stuForm" (ngSubmit)="onStuSubmit()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="validationServer01">Enter Rollno</label>
+            <input type="text" class="form-control" id="validationServer01" formControlName="rollno" required>
+            <small *ngIf="!stuForm.get('rollno').valid && stuForm.get('rollno').touched"
+              class="form-text text-danger is-valid">Please Enter Rollno.</small>
+          </div>
+
+          <div class="form-group">
+            <label>Enter Name</label>
+            <input type="text" class="form-control" formControlName="FullName">
+            <small *ngIf="!stuForm.get('FullName').valid && stuForm.get('FullName').touched"
+              class="form-text text-danger">Please Enter Name.</small>
+          </div>
+
+          <div class="form-group">
+            <label>Select Gender</label>
+            <select class="custom-select" formControlName="Gender">
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Select Year</label>
+            <select class="custom-select" formControlName="Year">
+              <option value="I">I</option>
+              <option value="II">II</option>
+              <option value="III">III</option>
+              <option value="IV">IV</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Select Department and Section</label>
+            <select class="custom-select" formControlName="Department_Course">
+              <option value="CSE-A">CSE-A</option>
+              <option value="CSE-B">CSE-B</option>
+              <option value="CSE-C">CSE-C</option>
+              <option value="CSE-D">CSE-D</option>
+              <option value="ECE-A">ECE-A</option>
+              <option value="ECE-B">ECE-B</option>
+              <option value="ECE-C">ECE-C</option>
+              <option value="ECE-D">ECE-D</option>
+              <option value="EEE-A">EEE-A</option>
+              <option value="EEE-B">EEE-B</option>
+              <option value="EEE-C">EEE-C</option>
+              <option value="MECH-A">MECH-A</option>
+              <option value="MECH-B">MECH-B</option>
+              <option value="MECH-C">MECH-C</option>
+              <option value="CE-A">CE-A</option>
+              <option value="CE-B">CE-B</option>
+              <option value="CE-C">CE-C</option>
+              <option value="IT-A">IT-A</option>
+              <option value="IT-B">IT-B</option>
+              <option value="IT-C">IT-C</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Enter PhNo</label>
+            <input type="text" class="form-control" formControlName="MobileNumber">
+            <small *ngIf="!stuForm.get('MobileNumber').valid && stuForm.get('MobileNumber').touched"
+              class="form-text text-danger">Please Enter Phone Number.</small>
+          </div>
+
+          <div class="form-group">
+            <label>Enter Email</label>
+            <input type="text" class="form-control" formControlName="Email_Id">
+            <small *ngIf="!stuForm.get('Email_Id').valid && stuForm.get('Email_Id').touched"
+              class="form-text text-danger">Please Enter Email Id.</small>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" (click)="onCloseModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" (click)="onCloseModal()">Update Student</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

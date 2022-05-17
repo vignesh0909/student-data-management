@@ -5,24 +5,21 @@ import { timer } from 'rxjs';
 import { Student } from 'app/model/student';
 import { StudentService } from 'app/services/student.service';
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-
-  stuForm : FormGroup;
-  showModal:boolean = false;
-  editMode:boolean = false;
+  stuForm: FormGroup;
+  showModal: boolean = false;
+  editMode: boolean = false;
   students: Student[];
-  rollno: string;
-  FullName: String;
+  search: any;
   totalRecords: any;
   page: any = 1;
 
-  constructor(private fb: FormBuilder, private stuService: StudentService) { }
+  constructor(private fb: FormBuilder, private stuService: StudentService) {}
 
   ngOnInit(): void {
     this.getStudents();
@@ -37,42 +34,21 @@ export class DashboardComponent implements OnInit {
       FatherName: [],
       MotherName: [],
       MobileNumber: ['9898989898'],
-      Email_Id: ['abc@gmail.com']
-    })
+      Email_Id: ['abc@gmail.com'],
+    });
   }
 
-  SearchByRoll(){
-    if(this.rollno == ""){
-      this.ngOnInit();
-    }else{
-      this.students = this.students.filter(res => {
-          return res.rollno?.toLocaleLowerCase().match(this.rollno?.toLocaleLowerCase());
-      })
-    }
-  }
-
-  SearchByName(){
-    if(this.FullName == ""){
-      this.ngOnInit();
-    }else{
-      this.students = this.students.filter(res => {
-        return res.FullName.toLocaleLowerCase().match(this.FullName.toLocaleLowerCase());
-      })
-    }
-  }
-
-  getStudents(){
-    this.stuService.getStudentList().subscribe(
-      (res: Student[]) => {
+  getStudents() {
+    this.stuService.getStudentList().subscribe((res: Student[]) => {
       //console.log(res);
       this.totalRecords = res.length;
       //console.log(this.totalRecords);
       this.students = res;
-    })
+    });
   }
 
-  onDeleteStudent(id: any){
-    if(confirm('Do you want to delete this student?')){
+  onDeleteStudent(id: any) {
+    if (confirm('Do you want to delete this student?')) {
       this.stuService.deleteStudent(id).subscribe(
         (res) => {
           console.log(res);
@@ -80,49 +56,39 @@ export class DashboardComponent implements OnInit {
         },
         (err) => {
           console.log(err);
-        })
+        }
+      );
     }
   }
 
-  onEditStudent(stu:Student){
-    console.log(stu);
+  onEditStudent(stu: Student) {
+    this.editMode = true;
     this.showModal = true;
     this.stuForm.patchValue(stu);
   }
 
-  onStuSubmit(){
-    if(this.stuForm.valid){
-      if(this.editMode){
-        this.stuService.updateStudent(this.stuForm.value).subscribe(
-          (res) => {
-            this.getStudents();
-            this.onCloseModal();
-          },(err) => console.log(err))
-      }
-      else{
-        this.stuService.addStudent(this.stuForm.value).subscribe(
-          (res) => {
-            this.getStudents();
-            this.onCloseModal();
-          }, err => console.log(err))
-      }
-    }
-    else{
-      console.log("Student already exits!");
+  onStuSubmit() {
+    if (this.stuForm.valid) {
+      this.stuService.updateStudent(this.stuForm.value).subscribe(
+        (res) => {
+          this.getStudents();
+          this.onCloseModal();
+        },
+        (err) => console.log(err)
+      );
+    } else {
+      console.log('Student already exits!');
     }
   }
 
-  onCloseModal(){
+  onCloseModal() {
     this.showModal = false;
     this.editMode = false;
   }
 
-  clickedStudent(req: any){
-    localStorage.setItem('currentUser',req);
+  clickedStudent(req: any) {
+    localStorage.setItem('currentUser', req);
   }
 
-  editDelete(){
-
-  }
-
+  editDelete() {}
 }

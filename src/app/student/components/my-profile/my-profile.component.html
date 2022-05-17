@@ -162,6 +162,14 @@
                   <input type="text" class="form-control" formControlName="MobileNumber">
                   <small *ngIf="!stuForm.get('MobileNumber').valid && stuForm.get('MobileNumber').touched" class="form-text text-danger">Please Enter Phone Number.</small>
                 </div>
+
+                <div class="form-group">
+                  <label>Enter Email</label>
+                  <input type="text" class="form-control" formControlName="Email_Id">
+                  <small *ngIf="!stuForm.get('Email_Id').valid && stuForm.get('Email_Id').touched"
+                    class="form-text text-danger">Please Enter Email Id.</small>
+                </div>
+
               </div>
               <div class="modal-footer">
                   <button type="button" (click)="onCloseModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
