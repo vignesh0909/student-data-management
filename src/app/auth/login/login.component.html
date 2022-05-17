@@ -15,7 +15,7 @@
 <div class="login-form">
   <!-- <img src="https://bit.ly/3vCwc2B" alt="vvitlogo" class="align-center"> -->
   <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <form [formGroup]="loginForm" (ngSubmit)="Proceedlogin()">
+    <form [formGroup]="loginForm" (ngSubmit)="Proceedlogin()" class="m-5 text-light">
 		  <div class="avatar"><i class="material-icons">&#xE7FF;</i></div>
     	<h4 class="modal-title">Login to Your Account</h4>
       <div class="form-group">

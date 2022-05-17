@@ -1,37 +1,59 @@
-<div class="col-md-6 text-center m-2">
-  <h2>Academic Profile</h2>
-</div>
-
 <div class="d-flex justify-content-center">
-  <div class="col-md-6">
-    <span>
-      <button routerLink="/faculty/dashboard" class="btn btn-outline-primary m-5">Back to Profile</button>
-    </span>
+  <div class="col-md-6 d-flex justify-content-center m-2">
+    <h2>Academic Profile</h2>
   </div>
 </div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mt-2">
+<div class="d-flex justify-content-center">
+  <div class="col-md-6 d-flex justify-content-end">
+    <button routerLink="/admin/dashboard" class="btn btn-success m-5" (click)="clearUser()">Back to Profile</button>
+  </div>
+  <div class="col-md-6 d-flex justify-content-start">
+    <button routerLink="/admin/placements" class="btn btn-secondary m-5" (click)="clickedStudent(user)">Placement Profile</button>
+  </div>
+</div>
 
-<ng-container matColumnDef="position">
-  <th mat-header-cell *matHeaderCellDef> No. </th>
-  <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-</ng-container>
+<div *ngFor="let x of groupedBySem">
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h1 class="text-center m-4">Sem-{{x[0].sem}}</h1>
+        </mat-panel-title>
+        <mat-panel-description>
+          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <table mat-table class="mat-elevation-z8 mt-2" [dataSource]="x">
+        <ng-container matColumnDef="S.No.">
+          <th mat-header-cell *matHeaderCellDef> S.No. </th>
+          <td mat-cell *matCellDef="let grades ; let i = index;"> {{i+1}} </td>
+        </ng-container>
 
-<ng-container matColumnDef="subject">
-  <th mat-header-cell *matHeaderCellDef> Subject </th>
-  <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
-</ng-container>
+        <ng-container matColumnDef="Subjcode">
+          <th mat-header-cell *matHeaderCellDef> Subject Code </th>
+          <td mat-cell *matCellDef="let grades"> {{grades.Subcode}} </td>
+        </ng-container>
 
-<ng-container matColumnDef="grade">
-  <th mat-header-cell *matHeaderCellDef> Grade </th>
-  <td mat-cell *matCellDef="let element"> {{element.grade}} </td>
-</ng-container>
+        <ng-container matColumnDef="Subject">
+          <th mat-header-cell *matHeaderCellDef> Subject </th>
+          <td mat-cell *matCellDef="let grades"> {{grades.Subname}} </td>
+        </ng-container>
 
-<ng-container matColumnDef="credits">
-  <th mat-header-cell *matHeaderCellDef> Credits </th>
-  <td mat-cell *matCellDef="let element"> {{element.credits}} </td>
-</ng-container>
+        <ng-container matColumnDef="Grade">
+          <th mat-header-cell *matHeaderCellDef> Grade </th>
+          <td mat-cell *matCellDef="let grades"> {{grades.Grade}} </td>
+        </ng-container>
 
-<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+        <ng-container matColumnDef="Credits">
+          <th mat-header-cell *matHeaderCellDef> Credits </th>
+          <td mat-cell *matCellDef="let grades"> {{grades.Credits}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

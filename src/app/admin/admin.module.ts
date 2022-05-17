@@ -13,6 +13,9 @@ import { AngularMaterialModule } from 'app/material/angular-material.module';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { AcademicDetailsComponent } from './components/academic-details/academic-details.component';
 import { PlacementDetailsComponent } from './components/placement-details/placement-details.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatMenuModule} from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { PlacementDetailsComponent } from './components/placement-details/placem
   imports: [
     CommonModule,
     AdminRoutingModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    NgxPaginationModule,
+    MatMenuModule
   ],
 })
 

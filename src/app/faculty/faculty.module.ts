@@ -10,6 +10,8 @@ import { WelcomePageComponent } from './components/welcome-page/welcome-page.com
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PlacementDetailsComponent } from './components/placement-details/placement-details.component';
 import { AcademicDetailsComponent } from './components/academic-details/academic-details.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { AcademicDetailsComponent } from './components/academic-details/academic
     CommonModule,
     FacultyRoutingModule,
     AngularMaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxPaginationModule,
+    MatMenuModule
   ],
 })
 

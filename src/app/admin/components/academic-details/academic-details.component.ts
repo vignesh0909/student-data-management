@@ -2,24 +2,14 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, NgZone, Injectable } from '@angular/core';
 import { StudentService } from 'app/services/student.service';
-import { DataSource } from '@angular/cdk/table';
 
-export interface PeriodicElement {
+export interface Grades {
   position: number;
+  subjcode: string;
   subject: string;
-  credits: number;
   grade: string;
+  credits: number;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, subject: 'CN&S', grade: 'A', credits: 3},
-  {position: 2, subject: 'SADP', grade: 'A', credits: 3},
-  {position: 3, subject: 'WT', grade: 'A', credits: 3},
-  {position: 4, subject: 'MEFA', grade: 'A', credits: 3},
-  {position: 5, subject: 'CC', grade: 'A', credits: 3},
-  {position: 6, subject: 'SADP LAB', grade: 'A', credits: 2},
-  {position: 7, subject: 'WT LAB', grade: 'A', credits: 2},
-];
 
 @Component({
   selector: 'app-academic-details',
@@ -28,16 +18,45 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class AcademicDetailsComponent implements OnInit {
-  subject: string;
-  position: number;
-  credits: number;
-  grade: string;
+  fetchedGrades: Grades[];
+  user = localStorage.getItem("currentUser");
+  panelOpenState = false;
 
   constructor(private fb: FormBuilder, private stuService: StudentService) { }
   ngOnInit(): void {
-
+    this.academicProfile();
   }
 
-  displayedColumns: string[] = ['position', 'subject', 'grade', 'credits'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['S.No.', 'Subjcode', 'Subject', 'Grade', 'Credits'];
+  dataSource: any;
+  groupedBySem: any;
+
+  academicProfile(){
+    console.log(this.user);
+    this.stuService.getAcademicProfile(this.user).subscribe((res) => {
+      console.log(res);
+      this.fetchedGrades = res;
+      console.log(this.fetchedGrades);
+      this.dataSource = this.fetchedGrades;
+      console.log(this.dataSource);
+      this.groupedBySem = Object.values(this.groupBy(this.dataSource, 'sem'));
+      console.log(this.groupedBySem);
+    })
+  }
+
+  groupBy = function(xs: any, key: any) {
+    console.log(xs);
+    return xs.reduce(function(rv: any, x: any) {
+      (rv[x[key]] = rv[x[key]] || []).push(x);
+      return rv;
+    }, {});
+  };
+
+  clickedStudent(req: any) {
+    localStorage.setItem('currentUser', req);
+  }
+
+  clearUser(){
+    localStorage.removeItem('currentUser');
+  }
 }

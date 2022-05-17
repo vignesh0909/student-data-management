@@ -1,8 +1,5 @@
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
-<!-- Bootstrap CSS -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
-<!-- Font Awesome CSS -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
 
 
@@ -89,5 +86,88 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+
+<div class="modal fade" [class.show]="showModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Update Student</h5>
+              <button (click)="onCloseModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <form [formGroup]="stuForm" (ngSubmit)="onStuSubmit()">
+              <div class="modal-body">
+                  <div class="form-group">
+                    <label for="validationServer01">Enter Rollno</label>
+                    <input type="text" class="form-control" id="validationServer01" formControlName="rollno" required>
+                    <small *ngIf="!stuForm.get('rollno').valid && stuForm.get('rollno').touched" class="form-text text-danger is-valid">Please Enter Rollno.</small>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Enter Name</label>
+                    <input type="text" class="form-control" formControlName="FullName">
+                    <small *ngIf="!stuForm.get('FullName').valid && stuForm.get('FullName').touched" class="form-text text-danger">Please Enter Name.</small>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Select Gender</label>
+                    <select class="custom-select" formControlName="Gender">
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Select Year</label>
+                    <select class="custom-select" formControlName="Year">
+                        <option value="I">I</option>
+                        <option value="II">II</option>
+                        <option value="III">III</option>
+                        <option value="IV">IV</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                      <label>Select Department and Section</label>
+                      <select class="custom-select" formControlName="Department_Course">
+                          <option value="CSE-A">CSE-A</option>
+                          <option value="CSE-B">CSE-B</option>
+                          <option value="CSE-C">CSE-C</option>
+                          <option value="CSE-D">CSE-D</option>
+                          <option value="ECE-A">ECE-A</option>
+                          <option value="ECE-B">ECE-B</option>
+                          <option value="ECE-C">ECE-C</option>
+                          <option value="ECE-D">ECE-D</option>
+                          <option value="EEE-A">EEE-A</option>
+                          <option value="EEE-B">EEE-B</option>
+                          <option value="EEE-C">EEE-C</option>
+                          <option value="MECH-A">MECH-A</option>
+                          <option value="MECH-B">MECH-B</option>
+                          <option value="MECH-C">MECH-C</option>
+                          <option value="CE-A">CE-A</option>
+                          <option value="CE-B">CE-B</option>
+                          <option value="CE-C">CE-C</option>
+                          <option value="IT-A">IT-A</option>
+                          <option value="IT-B">IT-B</option>
+                          <option value="IT-C">IT-C</option>
+                      </select>
+                  </div>
+
+                <div class="form-group">
+                  <label>Enter PhNo</label>
+                  <input type="text" class="form-control" formControlName="MobileNumber">
+                  <small *ngIf="!stuForm.get('MobileNumber').valid && stuForm.get('MobileNumber').touched" class="form-text text-danger">Please Enter Phone Number.</small>
+                </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" (click)="onCloseModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Update Student</button>
+              </div>
+          </form>
+      </div>
   </div>
 </div>

@@ -1,11 +1,14 @@
-<div class="card hovercard">
-  <div class="card-background">
-    <img class="card-bkimg" alt="" src="https://bit.ly/3vP3nQz">
-  </div>
-  <div class="useravatar">
-    <img alt="" src="https://bit.ly/3vP3nQz">
-  </div>
-  <div class="card-info">
-    <span class="card-title">Welcome {{ user }}</span>
+<div class="bg-container">
+  <marquee class="h1 text-success mt-5">Welcome {{ user.slice(0,10).toUpperCase() }}</marquee>
+  <div class="card hovercard">
+    <div class="card-background">
+      <img class="card-bkimg" alt="" src="https://bit.ly/3vP3nQz">
+    </div>
+    <div class="useravatar">
+      <img alt="" src="https://bit.ly/3vP3nQz">
+    </div>
+    <div class="card-info">
+      <span class="card-title">{{ user }}</span>
+    </div>
   </div>
 </div>

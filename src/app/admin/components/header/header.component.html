@@ -1,3 +1,6 @@
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
 <mat-toolbar color="primary">
   <span>
     <a routerLink="/admin/dashboard">View Students</a>
@@ -7,17 +10,17 @@
     <li>
       <a mat-button routerLink="/admin">Home</a>
     </li>
-    <li *ngIf="!userIsAuthenticated">
+    <li>
       <a mat-button routerLink="upload-personal-details" routerLinkActive="mat-accent">Upload Personal Data</a>
     </li>
-    <li *ngIf="!userIsAuthenticated">
+    <li>
       <a mat-button routerLink="upload-grades" routerLinkActive="mat-accent">Upload Grades</a>
     </li>
-    <li *ngIf="!userIsAuthenticated">
+    <li>
       <a mat-button routerLink="upload-placement-details" routerLinkActive="mat-accent">Upload Placements Data</a>
     </li>
-    <li *ngIf="!userIsAuthenticated">
-      <button mat-button (click)="onLogout()">Logout</button>
+    <li>
+      <button mat-button (click)="onLogout()"><span class="material-symbols-outlined">logout</span>Logout</button>
     </li>
   </ul>
 </mat-toolbar>

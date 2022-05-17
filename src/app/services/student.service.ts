@@ -36,7 +36,7 @@ export class StudentService {
   }
 
   getPlacementProfile(roll: any){
-    console.log(roll);
+    //console.log(roll);
     return this.http.get<any>(`${this.url}placements/${roll}`);
   }
 

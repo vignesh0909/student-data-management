@@ -1,3 +1,7 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body{
+    margin: 0%;
+}
 ul {
   list-style: none;
   padding: 0;
@@ -15,4 +19,56 @@ ul {
 
 .spacer {
   flex: 1 1 auto;
+}
+
+
+.companyName{
+  font-size: 150%;
+}
+
+.mat-toolbar{
+  /* height: 7vh; */
+  width: 100%;
+  margin: auto;
+  padding: 5px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(255,255,255,0.01);
+  backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 0.5px solid rgb(96, 97, 99);
+}
+
+div {
+  overflow: inherit;
+}
+
+.mat-sidenav-container{
+background-color: lightskyblue;
+min-height: 93vh !important;
+}
+
+a{
+  text-decoration: none;
+  font-size: 110%;
+  white-space: normal;
+}
+
+button{
+  font-size: 110%;
+  min-width: min-content;
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-sidenav-content{
+    font-size: 200%;
+    text-align: center;
 }

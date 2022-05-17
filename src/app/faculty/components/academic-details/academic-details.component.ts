@@ -19,7 +19,7 @@ export interface Grades {
 
 export class AcademicDetailsComponent implements OnInit {
   fetchedGrades: Grades[];
-  user = localStorage.getItem("user");
+  user = localStorage.getItem("currentUser");
   panelOpenState = false;
 
   constructor(private fb: FormBuilder, private stuService: StudentService) { }
@@ -32,7 +32,7 @@ export class AcademicDetailsComponent implements OnInit {
   groupedBySem: any;
 
   academicProfile(){
-    this.stuService.getAcademicProfile(this.user.slice(0,10).toUpperCase()).subscribe((res) => {
+    this.stuService.getAcademicProfile(this.user).subscribe((res) => {
       //console.log(res);
       this.fetchedGrades = res;
       console.log(this.fetchedGrades);
@@ -50,4 +50,8 @@ export class AcademicDetailsComponent implements OnInit {
       return rv;
     }, {});
   };
+
+  clearUser(){
+    localStorage.removeItem('currentUser');
+  }
 }

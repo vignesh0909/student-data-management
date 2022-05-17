@@ -17,28 +17,19 @@ body {
 	border-color: #4aba70;
 }
 .login-form {
-   /* width: 350px;
-	margin: 0 auto;
-	padding: 30px 0;
-  height: 100%;
-  width: 100%;
-  position: relative;
-  background-repeat: no-repeat;
-  font-family: sans-serif; */
   background-image: url("https://img.freepik.com/free-photo/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_1258-28313.jpg?w=360");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
 }
+
 .login-form form {
   height: 440px;
   width: 320px;
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 7% 4% ;
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 10px 20px 10px rgba(255, 255, 255, 0.1);
   border: 0.5px solid rgba(255,255, 255, 0.3);

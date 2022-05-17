@@ -1,17 +1,24 @@
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
 <mat-toolbar color="primary">
-  <span>
-    <a routerLink="/student/dashboard">VVIT</a>
-  </span>
-  <span class="spacer"></span>
-  <ul>
-    <li >
-      <a mat-button routerLink="/student">Home</a>
-    </li>
-    <li *ngIf="!userIsAuthenticated">
-      <a mat-button routerLink="my-profile" routerLinkActive="mat-accent">My Profile</a>
-    </li>
-    <li>
-      <button mat-button (click)="onLogout()">Logout</button>
-    </li>
-  </ul>
+  <div fxFlex fxLayoutAlign="center center">
+    <ul>
+      <li>
+        <a mat-button routerLink="/student">Home</a>
+      </li>
+      <li *ngIf="!userIsAuthenticated">
+        <a mat-button routerLink="my-profile" routerLinkActive="mat-accent">My Profile</a>
+      </li>
+      <li>
+        <a mat-button routerLink="academics" routerLinkActive="mat-accent">Academic Profile</a>
+      </li>
+      <li>
+        <a mat-button routerLink="placements" routerLinkActive="mat-accent">Placement Profile</a>
+      </li>
+      <li>
+        <button mat-button (click)="onLogout()"><span class="material-symbols-outlined">logout</span>Logout</button>
+      </li>
+    </ul>
+  </div>
 </mat-toolbar>

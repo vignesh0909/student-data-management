@@ -1,6 +1,11 @@
 table {
+  width: 100%;
+  margin: auto;
+}
+.mat-expansion-panel{
   width: 50%;
   margin-left:auto;
   margin-right:auto;
   vertical-align:middle;
+  margin-top: 20px;
 }

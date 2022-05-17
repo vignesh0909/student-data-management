@@ -39,12 +39,10 @@ export class MyProfileComponent implements OnInit {
   studentProfile(): void {
     this.stuService.getStudent(this.user.slice(0,10).toUpperCase()).subscribe((res) => {
       this.fetchedStudent = res;
-      //console.log(this.fetchedStudent.rollno);
     })
   }
 
   onEditStudent(req: any){
-    console.log(req);
     this.editMode = true;
     this.showModal = true;
     this.stuForm.patchValue(req);

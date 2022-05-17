@@ -15,11 +15,12 @@ export class DashboardComponent implements OnInit {
 
   stuForm : FormGroup;
   showModal:boolean = false;
-  showModal2:boolean = false;
   editMode:boolean = false;
   students: Student[];
-  rollno: String;
+  rollno: string;
   FullName: String;
+  totalRecords: any;
+  page: any = 1;
 
   constructor(private fb: FormBuilder, private stuService: StudentService) { }
 
@@ -29,11 +30,14 @@ export class DashboardComponent implements OnInit {
       _id: [''],
       rollno: ['Ex. XXBQXA0XXX', Validators.required],
       FullName: ['Ex. Someone', Validators.required],
-      dept: ['CSE'],
-      year: ['I'],
-      sem: ['1'],
-      sec: ['A'],
-      phno: ['9898989898']
+      Gender: ['M'],
+      Year: ['I'],
+      Department_Course: [''],
+      StudentAadharNumber: [],
+      FatherName: [],
+      MotherName: [],
+      MobileNumber: ['9898989898'],
+      Email_Id: ['abc@gmail.com']
     })
   }
 
@@ -42,7 +46,7 @@ export class DashboardComponent implements OnInit {
       this.ngOnInit();
     }else{
       this.students = this.students.filter(res => {
-          return res.rollno.toLocaleLowerCase().match(this.rollno.toLocaleLowerCase());
+          return res.rollno?.toLocaleLowerCase().match(this.rollno?.toLocaleLowerCase());
       })
     }
   }
@@ -60,7 +64,9 @@ export class DashboardComponent implements OnInit {
   getStudents(){
     this.stuService.getStudentList().subscribe(
       (res: Student[]) => {
-      console.log(res);
+      //console.log(res);
+      this.totalRecords = res.length;
+      //console.log(this.totalRecords);
       this.students = res;
     })
   }
@@ -79,7 +85,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onEditStudent(stu:Student){
-    this.editMode = true;
+    console.log(stu);
     this.showModal = true;
     this.stuForm.patchValue(stu);
   }
@@ -108,12 +114,15 @@ export class DashboardComponent implements OnInit {
 
   onCloseModal(){
     this.showModal = false;
-    this.showModal2 = false;
     this.editMode = false;
   }
 
-  onAddStudent(){
-    this.showModal = true;
+  clickedStudent(req: any){
+    localStorage.setItem('currentUser',req);
+  }
+
+  editDelete(){
+
   }
 
 }
