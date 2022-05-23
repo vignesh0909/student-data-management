@@ -1,5 +1,6 @@
 import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -16,6 +17,7 @@ import { PlacementDetailsComponent } from './components/placement-details/placem
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatMenuModule} from '@angular/material/menu';
 import { Ng2SearchPipeModule } from 'ng2-search-filter'
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter'
     UploadPersonalDetailsComponent,
     WelcomePageComponent,
     AcademicDetailsComponent,
-    PlacementDetailsComponent
+    PlacementDetailsComponent,
+    SignupComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +39,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter'
     AngularMaterialModule,
     NgxPaginationModule,
     MatMenuModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
 })
 

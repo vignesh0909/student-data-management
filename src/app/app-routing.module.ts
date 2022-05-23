@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AcademicDetailsComponent } from './academic-details/academic-details.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from "./guards/auth.guard";
 import { PageNotFoundComponent } from './auth/page-not-found/page-not-found.component';
 import { AdminGuard } from './guards/admin.guard';
@@ -13,7 +11,6 @@ import { FacultyGuard } from './guards/faculty.guard';
 const routes: Routes = [
   {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
   { path: "auth/login", component: LoginComponent},
-  { path: "auth/signup", component: SignupComponent},
   {
     path: 'admin',
     canActivate: [AuthGuard, AdminGuard],

@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { NgForm, FormGroup, FormControl, Validators} from "@angular/forms";
 import { Router } from "@angular/router";
+import { AuthService } from "app/services/auth.service";
 import { Subscription } from "rxjs";
-
-import { AuthService } from "../../services/auth.service";
 
 @Component({
   templateUrl: "./signup.component.html",
@@ -23,15 +22,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
   userRole = localStorage.getItem("role");
   ngOnInit() {
-    if(this.auth.getIsAuth() && this.userRole == "admin"){
-      this.router.navigate(['/admin']);
-    }
-    else if(this.auth.getIsAuth() && this.userRole == "student"){
-      this.router.navigate(['/student']);
-    }
-    else if(this.auth.getIsAuth() && this.userRole == "faculty"){
-      this.router.navigate(['/faculty']);
-    }
+
   }
 
   signupForm = new FormGroup({

@@ -36,23 +36,6 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  //adminLogin
-  /*
-  adminLogin(req: any) {
-    console.log(req.password);
-    if (req.username === 'admin@vvit.net' && req.password === 'admin12345') {
-      this.setToken('abcdefghijklmnopqrstuvwxyz');
-      this.router.navigate(['/admin']);
-      return of({ name: 'ADMIN VVIT', email: 'admin@gmail.com' });
-    }
-    console.log(req);
-    this.router.navigate(['/admin']);
-    this.http.post(this.url, req).toPromise()
-    .catch((err: any) => { throw err; });
-    //return throwError(new Error('Failed to login'));
-  }
-  */
-
   //userSignup
   createUser(req: any) {
     this.http.post(this.url, req).subscribe(

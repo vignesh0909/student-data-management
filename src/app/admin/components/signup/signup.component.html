@@ -16,7 +16,7 @@
   <mat-spinner *ngIf="isLoading"></mat-spinner>
     <form [formGroup]="signupForm" (ngSubmit)="onSignup()" class="m-5 text-light">
 		<div class="avatar"><i class="material-icons">&#xE7FF;</i></div>
-    	<h4 class="modal-title">Register Your Account</h4>
+    	<h4 class="modal-title">Register An Account</h4>
         <div class="form-group">
           <div *ngIf="signupForm.controls['username'].invalid && (signupForm.controls['username'].dirty || signupForm.controls['username'].touched)">
             <div *ngIf="signupForm.controls['username'].errors?.['required']" class="text-danger">
@@ -42,8 +42,6 @@
         </div>
 
         <input type="submit" *ngIf="!isLoading" class="btn btn-primary btn-block btn-lg" value="Register">
-        <br>
-        <div class="text-center small">Already Registered? <a routerLink="/auth/login">Back to Login</a></div>
     </form>
 </div>
 </body>

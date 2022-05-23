@@ -9,11 +9,9 @@ import { AngularMaterialModule } from "./material/angular-material.module";
 import { OrderModule } from 'ngx-order-pipe';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { AcademicDetailsComponent } from "./academic-details/academic-details.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { LoginComponent } from "./auth/login/login.component";
-import { SignupComponent } from "./auth/signup/signup.component";
 import { AuthInterceptor } from "./auth/auth-interceptor";
 import { StudentService } from "./services/student.service";
 
@@ -21,9 +19,7 @@ import { StudentService } from "./services/student.service";
 @NgModule({
   declarations: [
     AppComponent,
-    AcademicDetailsComponent,
-    LoginComponent,
-    SignupComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,

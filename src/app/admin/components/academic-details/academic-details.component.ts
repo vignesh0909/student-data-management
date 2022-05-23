@@ -1,6 +1,5 @@
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, NgZone, Injectable } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { StudentService } from 'app/services/student.service';
 
 export interface Grades {

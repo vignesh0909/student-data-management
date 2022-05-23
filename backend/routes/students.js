@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
 
   stu.save((err,doc) => {
     if(err){
-      console.log('Error in post data'+err);
+      console.log('Error in post data:'+err);
     } else{
       //console.log(doc);
       res.send(doc);

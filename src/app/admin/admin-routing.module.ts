@@ -8,6 +8,7 @@ import { UploadPersonalDetailsComponent } from './components/upload-personal-det
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { PlacementDetailsComponent } from './components/placement-details/placement-details.component';
 import { AcademicDetailsComponent } from './components/academic-details/academic-details.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'upload-personal-details', component: UploadPersonalDetailsComponent },
       { path: 'placements', component: PlacementDetailsComponent },
       { path: 'academics', component: AcademicDetailsComponent },
+      { path: 'registration', component:  SignupComponent},
       //{ path: 'home', component: HomeComponent },
       {path: '', redirectTo: '/admin', pathMatch: 'full'}
     ],

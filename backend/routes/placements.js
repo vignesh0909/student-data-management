@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
       if(err){
           console.log('Error in GET Data ' + err);
       } else {
-        console.log(doc);
+        //console.log(doc);
         res.send(doc);
       }
   })
