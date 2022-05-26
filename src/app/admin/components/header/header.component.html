@@ -3,13 +3,10 @@
 
 <mat-toolbar color="primary">
   <span>
-    <a routerLink="/admin/dashboard">View Students</a>
+    <a routerLink="/admin/dashboard">Dashboard</a>
   </span>
   <span class="spacer"></span>
   <ul>
-    <li>
-      <a mat-button routerLink="/admin">Home</a>
-    </li>
     <li>
       <a mat-button routerLink="upload-personal-details" routerLinkActive="mat-accent">Upload Personal Data</a>
     </li>
@@ -20,7 +17,7 @@
       <a mat-button routerLink="upload-placement-details" routerLinkActive="mat-accent">Upload Placements Data</a>
     </li>
     <li>
-      <a mat-button routerLink="registration" routerLinkActive="mat-accent">Register a User</a>
+      <a mat-button routerLink="registration" routerLinkActive="mat-accent">Register Users</a>
     </li>
     <li>
       <button mat-button (click)="onLogout()"><span class="material-symbols-outlined">logout</span>Logout</button>

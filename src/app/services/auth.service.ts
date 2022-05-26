@@ -1,9 +1,9 @@
-import { Observable, of, Subject, throwError } from 'rxjs';
+import { from, Observable, of, Subject, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'app/model/user';
-
+import { concatMap, delay } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -34,6 +34,12 @@ export class AuthService {
 
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
+  }
+
+  jsonToMongo(req: any){
+    from(req)
+    .pipe(concatMap(item => this.http.post(this.url, item).toPromise()))
+    .subscribe();
   }
 
   //userSignup
