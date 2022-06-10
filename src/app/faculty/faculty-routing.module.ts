@@ -13,10 +13,10 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     children: [
-      { path: '', component: WelcomePageComponent },
+      //{ path: '', component: WelcomePageComponent },
       { path: 'dashboard', component: DashboardComponent },
-      //{ path: 'home', component: HomeComponent },
-      {path: '', redirectTo: '/faculty', pathMatch: 'full'},
+      { path: 'home', component: WelcomePageComponent },
+      {path: '', redirectTo: '/faculty/dashboard', pathMatch: 'full'},
       {path: 'academics', component: AcademicDetailsComponent },
       {path: 'placements', component: PlacementDetailsComponent }
     ],

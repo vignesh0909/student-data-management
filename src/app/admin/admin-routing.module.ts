@@ -15,16 +15,14 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     children: [
-      { path: '', component: WelcomePageComponent },
+      {path: '', redirectTo: '/admin/dashboard', pathMatch: 'full'},
       { path: 'dashboard', component: DashboardComponent },
       { path: 'upload-grades', component: UploadGradesComponent },
       { path: 'upload-placement-details', component: UploadPlacementDetailsComponent },
       { path: 'upload-personal-details', component: UploadPersonalDetailsComponent },
       { path: 'placements', component: PlacementDetailsComponent },
       { path: 'academics', component: AcademicDetailsComponent },
-      { path: 'registration', component:  SignupComponent},
-      //{ path: 'home', component: HomeComponent },
-      {path: '', redirectTo: '/admin', pathMatch: 'full'}
+      { path: 'registration', component:  SignupComponent},  
     ],
   },
 ];

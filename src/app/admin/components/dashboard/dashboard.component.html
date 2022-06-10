@@ -7,7 +7,7 @@
 <div class="container bg-light bg-gradient">
 
   <div class="col d-flex justify-content-center m-2">
-    <h2>Student Dashboard</h2>
+    <h2 class="font-weight-bold">Student Dashboard</h2>
   </div>
   <hr>
   <div class="row justify-content-center">
@@ -15,7 +15,7 @@
       <h2 class="font-weight-bold">Search Student</h2>
     </div>
     <div class="col-md-4 mb-3">
-      <input class="form-control" type="text"  [(ngModel)]="search"
+      <input class="form-control" type="text" [(ngModel)]="search"
         placeholder="Enter RollNo/Name to search">
     </div>
   </div>
@@ -38,7 +38,10 @@
             <mat-icon>more_vert</mat-icon>
           </button>
         </div>
-        <h3 class="User-name text-primary">{{ item.rollno }}</h3>
+        <div class="User-name">
+          <a class="text-danger" routerLink="/admin/academics" (click)="clickedStudent(item.rollno)">{{
+            item.rollno }}</a>
+        </div>
         <h4 class="designation">{{ item.FullName }}</h4>
         <div class="card-body pt-0">
           <table class="table table-bordered">
@@ -58,22 +61,11 @@
               <td>{{item.MobileNumber}}</td>
             </tr>
             <tr>
-              <th width="15%">Father Name</th>
-              <td width="2%">:</td>
-              <td>{{item.FatherName}}</td>
-            </tr>
-            <tr>
               <th width="15%">Email</th>
               <td width="2%">:</td>
               <td>{{item.Email_Id}}</td>
             </tr>
           </table>
-        </div>
-        <div class="contact-btn">
-          <button routerLink="/admin/academics" type="button" class="btn btn-sm btn-success"
-            (click)="clickedStudent(item.rollno)">Academics</button>
-          <button routerLink="/admin/placements" type="button" class="btn btn-sm btn-secondary"
-            (click)="clickedStudent(item.rollno)">Placements</button>
         </div>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="onEditStudent(item)">
