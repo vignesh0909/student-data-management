@@ -18,10 +18,10 @@
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <h1 class="text-center m-4">Sem-{{x[0].sem}}</h1>
+            <h1 class="text-center m-4">Sem {{x[0].sem}}</h1>
           </mat-panel-title>
           <mat-panel-description>
-            Sem-{{x[0].sem}}
+            Sem {{x[0].sem}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <table mat-table class="mat-elevation-z8 mt-2" [dataSource]="x">

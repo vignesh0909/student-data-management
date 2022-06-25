@@ -22,7 +22,6 @@ router.post("/", (req, res) => {
         });
       })
       .catch((err) => {
-        //console.log(err);
         res.status(500).json({
           message: "User Already Registered!",
         });
@@ -52,31 +51,6 @@ router.get("/findByUsername/:username", (req, res) => {
       res.send(doc);
     }
   });
-  //return res.status(400).send(`No record found with roll ${req.params.rollno}`);
-});
-
-//PUT(Update) users API
-router.patch("/:id", (req, res) => {
-  if (ObjectId.isValid(req.params.id)) {
-    let user = {
-      username: req.body.username,
-      password: req.body.password,
-    };
-    Users.findByIdAndUpdate(
-      req.params.id,
-      { $set: user },
-      { new: true },
-      (err, doc) => {
-        if (err) {
-          console.log("Error in UPDATE User Credentials" + err);
-        } else {
-          res.send(doc);
-        }
-      }
-    );
-  } else {
-    return res.status(400).send(`No record found with Id ${req.params.id}`);
-  }
 });
 
 router.post("/login", (req, res, next) => {
@@ -84,7 +58,6 @@ router.post("/login", (req, res, next) => {
   let invalidUser = false;
   Users.findOne({ username: req.body.username })
     .then((user) => {
-      //console.log(user);
       if (!user) {
         invalidUser = true;
         return res.send({
@@ -92,19 +65,15 @@ router.post("/login", (req, res, next) => {
         });
       }
       fetchedUser = user;
-      //console.log(invalidUser);
       return bcrypt.compare(req.body.password, user.password);
     })
     .then((result) => {
-      //console.log(result);
       if (!result) {
         invalidUser = true;
         return res.send({
           message: "Invalid Password",
         });
       } else if(!invalidUser){
-        //console.log(invalidUser);
-        //Users.findById()
         const token = jwt.sign(
           { username: fetchedUser.username, userId: fetchedUser._id },
           "secret_this_should_be_longer",

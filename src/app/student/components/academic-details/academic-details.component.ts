@@ -35,16 +35,16 @@ export class AcademicDetailsComponent implements OnInit {
     this.stuService.getAcademicProfile(this.user.slice(0,10).toUpperCase()).subscribe((res) => {
       //console.log(res);
       this.fetchedGrades = res;
-      console.log(this.fetchedGrades);
+      //console.log(this.fetchedGrades);
       this.dataSource = this.fetchedGrades;
-      console.log(this.dataSource);
+      //console.log(this.dataSource);
       this.groupedBySem = Object.values(this.groupBy(this.dataSource, 'sem'));
-      console.log(this.groupedBySem);
+      //console.log(this.groupedBySem);
     })
   }
 
   groupBy = function(xs: any, key: any) {
-    console.log(xs);
+    //console.log(xs);
     return xs.reduce(function(rv: any, x: any) {
       (rv[x[key]] = rv[x[key]] || []).push(x);
       return rv;

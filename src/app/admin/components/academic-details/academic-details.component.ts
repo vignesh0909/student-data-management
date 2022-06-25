@@ -31,7 +31,7 @@ export class AcademicDetailsComponent implements OnInit {
   groupedBySem: any;
 
   academicProfile(){
-    console.log(this.user);
+    //console.log(this.user);
     this.stuService.getAcademicProfile(this.user).subscribe((res) => {
       console.log(res);
       this.fetchedGrades = res;

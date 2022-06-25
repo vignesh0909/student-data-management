@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { UploadGradesComponent } from './components/upload-grades/upload-grades.component';
 import { UploadPlacementDetailsComponent } from './components/upload-placement-details/upload-placement-details.component';
 import { UploadPersonalDetailsComponent } from './components/upload-personal-details/upload-personal-details.component';
@@ -23,7 +22,6 @@ import { SignupComponent } from './components/signup/signup.component';
   declarations: [
     DashboardComponent,
     HeaderComponent,
-    FooterComponent,
     HomeComponent,
     UploadGradesComponent,
     UploadPlacementDetailsComponent,

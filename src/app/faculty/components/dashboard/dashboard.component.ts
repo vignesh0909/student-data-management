@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
     if (confirm('Do you want to delete this student?')) {
       this.stuService.deleteStudent(id).subscribe(
         (res) => {
-          console.log(res);
+          //console.log(res);
           this.getStudents();
         },
         (err) => {

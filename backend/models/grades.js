@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator");
 
 const Grades = mongoose.model('Grades', {
   Htno: { type: String, required: true },
@@ -9,7 +8,6 @@ const Grades = mongoose.model('Grades', {
   Subname: {type: String, required: true},
   Grade: {type: String, required: true},
   Credits: {type: Number, required: true},
-  //cgpa: {type: String, required: true},
 });
 
 module.exports = Grades;

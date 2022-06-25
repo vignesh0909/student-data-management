@@ -27,12 +27,12 @@ export class UploadPersonalDetailsComponent implements OnInit {
     const fileReader = new FileReader();
     fileReader.readAsBinaryString(selectedFile);
     fileReader.onload = (event) => {
-      console.log(event);
+      //console.log(event);
       let binaryData = event.target.result;
       let workbook = XLSX.read(binaryData,{type: 'binary'});
       workbook.SheetNames.forEach(sheet => {
         var data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
-        console.log(data);
+        //console.log(data);
         this.personalUpload.jsonToMongo(data);
         this.uploadSuccess = true;
         const dialogRef = this.dialog.open(DialogBox, {

@@ -33,9 +33,9 @@ export class PlacementDetailsComponent implements OnInit {
     this.stuService.getPlacementProfile(this.user.slice(0,10).toUpperCase()).subscribe((res) => {
       //console.log(res);
       this.fetchedPlacements = res;
-      console.log(this.fetchedPlacements);
+      //console.log(this.fetchedPlacements);
       this.dataSource = this.fetchedPlacements;
-      console.log(this.dataSource);
+      //console.log(this.dataSource);
     })
   }
 }
